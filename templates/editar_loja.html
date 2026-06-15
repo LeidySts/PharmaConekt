@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px;">
+    <h2>Modificar Parâmetros de Integração</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label>Nome Fantasia</label>
+            <input type="text" name="nome" value="{{ loja.nome }}" required>
+        </div>
+        <div class="form-group">
+            <label>CNPJ</label>
+            <input type="text" name="cnpj" value="{{ loja.cnpj }}" required>
+        </div>
+        <div class="form-group">
+            <label>Sistema de PDV Local</label>
+            <select name="pdv_sistema">
+                <option value="Linx Farma" {% if loja.pdv_sistema == 'Linx Farma' %}selected{% endif %}>Linx Farma</option>
+                <option value="Trier Sistemas" {% if loja.pdv_sistema == 'Trier Sistemas' %}selected{% endif %}>Trier Sistemas</option>
+                <option value="InovaFarma" {% if loja.pdv_sistema == 'InovaFarma' %}selected{% endif %}>InovaFarma</option>
+                <option value="Outro/Customizado" {% if loja.pdv_sistema == 'Outro/Customizado' %}selected{% endif %}>Outro/Customizado</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Status da Operação</label>
+            <select name="status_onboarding">
+                <option value="Em Integração" {% if loja.status_onboarding == 'Em Integração' %}selected{% endif %}>Em Integração</option>
+                <option value="Ativo" {% if loja.status_onboarding == 'Ativo' %}selected{% endif %}>Ativo</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Atualizar Dados</button>
+        <a href="{{ url_for('listar_lojas') }}" class="btn btn-danger">Voltar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Painel Tático - Monitoramento de OKRs / KPIs</h2>
+<p style="color: var(--secondary-color);">Dados integrados em tempo real de farmácias e micro-redes do Pará.</p>
+
+<div class="card-grid">
+    <div class="card">
+        <h3>Farmácias Conectadas (KR1)</h3>
+        <div class="value">{{ total_lojas }} / 30</div>
+    </div>
+    <div class="card" style="border-top-color: var(--success-color);">
+        <h3>Clientes Ativados</h3>
+        <div class="value">{{ lojas_ativas }}</div>
+    </div>
+    <div class="card" style="border-top-color: var(--warning-color);">
+        <h3>Previsão MRR Atual</h3>
+        <div class="value">R$ {{ mrr_atual }}</div>
+    </div>
+    <div class="card" style="border-top-color: var(--danger-color);">
+        <h3>Aceitação Algoritmo (KPI 4)</h3>
+        <div class="value">{{ taxa_aceitacao }}%</div>
+    </div>
+</div>
+
+<div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <h3>Alinhamento Estratégico (Metas Base)</h3>
+    <ul>
+        <li><b>Meta Operacional Anual:</b> Reduzir perdas por ruptura de estoque e vencimento em até 40%.</li>
+        <li><b>Latência de Sincronismo:</b> Ajustada dinamicamente abaixo de 5 segundos via API.</li>
+        <li><b>Target Geográfico Corrente:</b> Região Metropolitana de Belém (Foco inicial: Marco / Batista Campos).</li>
+    </ul>
+    <a href="{{ url_for('listar_lojas') }}" class="btn btn-primary">Gerenciar Cadastros de Lojas</a>
+</div>
+{% endblock %}
