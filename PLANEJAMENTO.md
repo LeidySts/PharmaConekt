@@ -71,7 +71,7 @@ gantt
 ##4. DIAGRAMA DE FASES DO PROJETO
 
 Ciclo de vida do projeto orientado por portões de decisão e marcos técnicos:
-```mermaind
+```mermaid
 stateDiagram-v2
     [*] --> Discovery : Início do Projeto
     Discovery --> Desenvolvimento : Marco 1: Protótipo Aprovado
@@ -83,7 +83,7 @@ stateDiagram-v2
 ## 5. DIAGRAMA DE CASOS DE USO
 
 Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:´
-```mermain
+```mermaind
 leftToRightDirection
 actor "Administrador Master" as admin
 actor "Dono de Farmácia" as dono
