@@ -35,7 +35,9 @@ graph TD
     D --> D1[3.1 Testes Unitários]
     D --> D2[3.2 Homologação com Pilotos]
     E --> E1[4.1 Deploy em Nuvem Cloud]
-    E --> E2[4.2 Treinamento de Usuários] ´´´
+    E --> E2[4.2 Treinamento de Usuários]
+```
+
 
 
 ## 3. CRONOGRAMA MACRO (GRÁFICO DE GANTT)
