@@ -17,7 +17,7 @@ O **PharmaConekt** centraliza e unifica os dados de estoque e vendas entre farm�
 
 A decomposição hierárquica do trabalho para a construção completa do ecossistema:
 
-    ```mermaid
+```mermaid
     graph TD
     A[PharmaConekt MVP] --> B[1. Discovery & Design]
     A --> C[2. Desenvolvimento]
@@ -35,10 +35,10 @@ A decomposição hierárquica do trabalho para a construção completa do ecossi
     D --> D1[3.1 Testes Unitários]
     D --> D2[3.2 Homologação com Pilotos]
     E --> E1[4.1 Deploy em Nuvem Cloud]
-    E --> E2[4.2 Treinamento de Usuários] 
+    E --> E2[4.2 Treinamento de Usuários] '''
 
 
--## 3. CRONOGRAMA MACRO (GRÁFICO DE GANTT)
+## 3. CRONOGRAMA MACRO (GRÁFICO DE GANTT)
 
 O cronograma de execução está planejado para uma janela de 5 meses (20 semanas):
 gantt
