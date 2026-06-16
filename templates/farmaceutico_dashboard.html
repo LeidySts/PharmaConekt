@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+        <div>
+            <span class="badge bg-primary text-uppercase mb-2" style="letter-spacing: 1px;">Módulo Técnico</span>
+            <h1 class="h2 text-dark m-0">🥼 Painel do Farmacêutico</h1>
+            <p class="text-muted m-0">Gestão de Validades e Monitoramento de Ruptura de Estoque</p>
+        </div>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-sm">Voltar ao Painel Tático</a>
+    </div>
+
+    <!-- Alertas Rápidos -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card border-start border-danger border-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-danger">⚠️ Alerta Urgente de Vencimento</h5>
+                    <p class="card-text">Lotes de antibióticos com vencimento nos próximos 30 dias exigem ação imediata na gôndola.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-start border-warning border-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">📦 Risco de Ruptura</h5>
+                    <p class="card-text">Itens de alta rotatividade estão operando abaixo do estoque de segurança dinâmica da API.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Controle -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-light text-dark fw-bold">
+            Medicamentos Monitorados na Região Metropolitana
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Medicamento</th>
+                        <th>Classe</th>
+                        <th>Data de Vencimento</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">Amoxicilina + Clavulanato de Potássio 500mg</td>
+                        <td>Antibiótico</td>
+                        <td>15/07/2026</td>
+                        <td><span class="badge bg-danger">Vencimento Próximo</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Dipirona Monoidratada 500mg/mL Gotas</td>
+                        <td>Analgésico</td>
+                        <td>12/11/2027</td>
+                        <td><span class="badge bg-success">Estoque Seguro</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Losartana Potássica 50mg</td>
+                        <td>Anti-hipertensivo</td>
+                        <td>04/09/2026</td>
+                        <td><span class="badge bg-warning text-dark">Atenção (60 dias)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

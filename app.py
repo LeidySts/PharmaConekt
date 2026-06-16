@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -166,6 +166,14 @@ def inicializar_banco():
             
             db.session.commit()
 
+
+@app.route('/dono')
+def vista_dono():
+    return render_template('dono_dashboard.html')
+
+@app.route('/farma')
+def vista_farma():
+    return render_template('farmaceutico_dashboard.html')
 if __name__ == '__main__':
-    inicializar_banco()
     app.run(debug=True)
+    
