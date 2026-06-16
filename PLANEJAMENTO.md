@@ -82,32 +82,24 @@ stateDiagram-v2
 
 ## 5. DIAGRAMA DE CASOS DE USO
 
-Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:´
+Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:
 
 ```mermaid
-usecaseDiagram
-    leftToRightDirection
+graph LR
+    admin[Administrador Master] --- uc1(Fazer Login)
+    admin --- uc2(Cadastrar Loja)
+    admin --- uc3(Listar Lojas)
 
-    actor admin as "Administrador Master"
-    actor dono as "Dono de Farmácia"
-    actor cs as "Operador de Onboarding"
-    actor pdv as "Sistema de PDV Externo"
+    dono[Dono de Farmácia] --- uc1
+    dono --- uc4(Ver Dashboard de KPIs)
 
-    rectangle "Plataforma PharmaConekt (MVP)" {
-        admin --> (Fazer Login)
-        dono --> (Fazer Login)
-        cs --> (Fazer Login)
-        
-        admin --> (Cadastrar Loja)
-        admin --> (Listar Lojas)
-        dono --> (Ver Dashboard de KPIs)
-        
-        cs --> (Consultar Integração)
-        cs --> (Atualizar Status da Loja)
-        
-        pdv --> (Importar Dados de Vendas)
-    }
-```
+    cs[Operador de Onboarding] --- uc1
+    cs --- uc5(Consultar Integração)
+    cs --- uc6(Atualizar Status da Loja)
+
+    pdv[Sistema de PDV Externo] --- uc7(Importar Dados de Vendas)
+
+   ```
 
 ## 6. DIAGRAMA DE CLASSES
 
