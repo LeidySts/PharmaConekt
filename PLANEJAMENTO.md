@@ -86,25 +86,26 @@ Interações de atores externos e usuários com as funcionalidades previstas no 
 
 ```mermaid
 graph LR
-leftToRightDirection
-actor "Administrador Master" as admin
-actor "Dono de Farmácia" as dono
-actor "Operador de Onboarding" as cs
-actor "Sistema de PDV Externo" as pdv
+    leftToRightDirection
 
-rectangle "Plataforma PharmaConekt (MVP)" {
-    admin --> (Fazer Login)
-    dono --> (Fazer Login)
-    cs --> (Fazer Login)
+    actor "Administrador Master" as admin
+    actor "Dono de Farmácia" as dono
+    actor "Operador de Onboarding" as cs
+    actor "Sistema de PDV Externo" as pdv
+
+    rectangle "Plataforma PharmaConekt (MVP)" {
+        admin --> (Fazer Login)
+        dono --> (Fazer Login)
+        cs --> (Fazer Login)
     
-    admin --> (Cadastrar Loja)
-    admin --> (Listar Lojas)
-    dono --> (Ver Dashboard de KPIs)
-    
-    cs --> (Consultar Integração)
-    cs --> (Atualizar Status da Loja)
-    
-    pdv --> (Importar Dados de Vendas)
+        admin --> (Cadastrar Loja)
+        admin --> (Listar Lojas)
+        dono --> (Ver Dashboard de KPIs)
+        
+        cs --> (Consultar Integração)
+        cs --> (Atualizar Status da Loja)
+        
+        pdv --> (Importar Dados de Vendas)
 }
 ```
 
