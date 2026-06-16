@@ -1,14 +1,14 @@
 # 📊 PharmaConekt - Plano de Gerência e Engenharia de Software
 
-[cite_start]Este documento detalha o planejamento estratégico, o escopo do MVP e a modelagem arquitetural da plataforma SaaS **PharmaConekt**[cite: 115, 116].
+Este documento detalha o planejamento estratégico, o escopo do MVP e a modelagem arquitetural da plataforma SaaS **PharmaConekt**.
 
 ---
 
 ## 1. INTRODUÇÃO
 
-[cite_start]O **PharmaConekt** centraliza e unifica os dados de estoque e vendas entre farmácias independentes, micro-redes, distribuidores e sistemas de PDV na região metropolitana de Belém[cite: 115, 116, 118]. [cite_start]O objetivo principal é mitigar os prejuízos causados por ilhas de informação isoladas, reduzindo rupturas e perdas por vencimento em até 40%[cite: 116, 117, 119].
+O **PharmaConekt** centraliza e unifica os dados de estoque e vendas entre farmácias independentes, micro-redes, distribuidores e sistemas de PDV na região metropolitana de Belém. O objetivo principal é mitigar os prejuízos causados por ilhas de informação isoladas, reduzindo rupturas e perdas por vencimento em até 40%.
 
-* [cite_start]**Visão do Produto:** "Para farmácias independentes e micro-redes que sofrem com a desintegração de estoques, o PharmaConekt é um ecossistema SaaS que conecta PDVs e distribuidores, eliminando ilhas de informação e reduzindo perdas em até 40%." [cite: 116, 119]
+* **Visão do Produto:** "Para farmácias independentes e micro-redes que sofrem com a desintegração de estoques, o PharmaConekt é um ecossistema SaaS que conecta PDVs e distribuidores, eliminando ilhas de informação e reduzindo perdas em até 40%."
 * **Missão do MVP:** Entregar um barramento funcional em Python Flask com persistência SQLite capaz de gerenciar o onboarding e as métricas táticas de faturamento de forma ágil e centralizada.
 
 ---
@@ -37,8 +37,10 @@ graph TD
 
     E --> E1[4.1 Deploy em Nuvem Cloud]
     E --> E2[4.2 Treinamento de Usuários]
+## 3. CRONOGRAMA MACRO (GRÁFICO DE GANTT)
 
-    gantt
+O cronograma de execução está planejado para uma janela de 5 meses (20 semanas):
+gantt
     title Cronograma de Execução (5 Meses)
     dateFormat  YYYY-MM-DD
     axisFormat %m/%Y
@@ -60,14 +62,20 @@ graph TD
     Deploy em Produção          : p8, 2026-07-01, 2026-07-15
     Treinamento e Campanha      : p9, 2026-07-15, 2026-07-31
 
-    stateDiagram-v2
+##4. DIAGRAMA DE FASES DO PROJETO
+
+Ciclo de vida do projeto orientado por portões de decisão e marcos técnicos:
+stateDiagram-v2
     [*] --> Discovery : Início do Projeto
     Discovery --> Desenvolvimento : Marco 1: Protótipo Aprovado
     Desenvolvimento --> Testes : Marco 2: Backend & CRUD Concluído
     Testes --> Lançamento : Marco 3: Homologação / UAT OK
     Lançamento --> [*] : Marco 4: Sistema em Produção
 
-    leftToRightDirection
+## 5. DIAGRAMA DE CASOS DE USO
+
+Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:
+leftToRightDirection
 actor "Administrador Master" as admin
 actor "Dono de Farmácia" as dono
 actor "Operador de Onboarding" as cs
@@ -88,6 +96,9 @@ rectangle "Plataforma PharmaConekt (MVP)" {
     pdv --> (Importar Dados de Vendas)
 }
 
+## 6. DIAGRAMA DE CLASSES
+
+Estrutura das tabelas de dados gerenciadas pelas models do Flask:
 classDiagram
     class Usuario {
         +int id
@@ -111,13 +122,9 @@ classDiagram
     }
 
     Usuario "1" --> "0..*" Loja : Gerencia/Monitora
-    ## 7. COMPOSIÇÃO DA EQUIPE (SQUADS FUNCIONAIS)
 
-Nos primeiros 12 meses, a empresa adota um modelo de squads funcionais enxutos, com hierarquia plana, comunicação direta e regime de trabalho remoto-assíncrono. O escritório físico compartilhado localiza-se nos bairros do Marco ou Batista Campos, em Belém. 
-
-A equipe é composta por 9 integrantes, divididos da seguinte forma:
-
-```mermaid
+##7. COMPOSIÇÃO DA EQUIPE (SQUADS FUNCIONAIS)
+Nos primeiros 12 meses, a empresa adota um modelo de squads funcionais enxutos, com hierarquia plana, comunicação direta e regime de trabalho remoto-assíncrono. O escritório físico compartilhado localiza-se nos bairros do Marco ou Batista Campos, em Belém.A equipe é composta por 9 integrantes, divididos da seguinte forma:
 graph TD
     CEO[CEO / Founder<br>Visão, Captação e Parcerias] --> DevSquad
     CEO --> DataSquad
