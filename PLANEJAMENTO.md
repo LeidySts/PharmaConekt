@@ -43,18 +43,20 @@ graph TD
 ## 3. CRONOGRAMA MACRO (GRÁFICO DE GANTT)
 
 O cronograma de execução está planejado para uma janela de 5 meses (20 semanas):
+
+```mermaid
 gantt
     title Cronograma de Execução (5 Meses)
     dateFormat  YYYY-MM-DD
     axisFormat %m/%Y
 
-    section Discovery & Design
+    section Discovery 
     Pesquisa e Requisitos       :active, p1, 2026-03-01, 2026-03-15
     Backlog e Prototipação      : p2, 2026-03-15, 2026-03-31
 
-    section Desenvolvimento Core
+    section Desenvolvimento
     Banco de Dados e Models     : p3, 2026-04-01, 2026-04-15
-    Rotas, Autenticação e CRUD  : p4, 2026-04-15, 2026-05-31
+    Rotas, Auth e CRUD Flask    : p4, 2026-04-15, 2026-05-31
     Dashboard e KPIs            : p5, 2026-05-15, 2026-05-31
 
     section Testes & QA
@@ -64,20 +66,24 @@ gantt
     section Lançamento
     Deploy em Produção          : p8, 2026-07-01, 2026-07-15
     Treinamento e Campanha      : p9, 2026-07-15, 2026-07-31
+```
 
 ##4. DIAGRAMA DE FASES DO PROJETO
 
 Ciclo de vida do projeto orientado por portões de decisão e marcos técnicos:
+```mermaind
 stateDiagram-v2
     [*] --> Discovery : Início do Projeto
     Discovery --> Desenvolvimento : Marco 1: Protótipo Aprovado
     Desenvolvimento --> Testes : Marco 2: Backend & CRUD Concluído
     Testes --> Lançamento : Marco 3: Homologação / UAT OK
     Lançamento --> [*] : Marco 4: Sistema em Produção
+```
 
 ## 5. DIAGRAMA DE CASOS DE USO
 
-Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:
+Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:´
+```mermain
 leftToRightDirection
 actor "Administrador Master" as admin
 actor "Dono de Farmácia" as dono
@@ -98,10 +104,12 @@ rectangle "Plataforma PharmaConekt (MVP)" {
     
     pdv --> (Importar Dados de Vendas)
 }
+```
 
 ## 6. DIAGRAMA DE CLASSES
 
 Estrutura das tabelas de dados gerenciadas pelas models do Flask:
+```mermaid
 classDiagram
     class Usuario {
         +int id
@@ -110,7 +118,6 @@ classDiagram
         +String password_hash
         +fazer_login()
     }
-
     class Loja {
         +int id
         +String nome
@@ -125,9 +132,11 @@ classDiagram
     }
 
     Usuario "1" --> "0..*" Loja : Gerencia/Monitora
+```
 
 ##7. COMPOSIÇÃO DA EQUIPE (SQUADS FUNCIONAIS)
 Nos primeiros 12 meses, a empresa adota um modelo de squads funcionais enxutos, com hierarquia plana, comunicação direta e regime de trabalho remoto-assíncrono. O escritório físico compartilhado localiza-se nos bairros do Marco ou Batista Campos, em Belém.A equipe é composta por 9 integrantes, divididos da seguinte forma:
+```mermaid
 graph TD
     CEO[CEO / Founder<br>Visão, Captação e Parcerias] --> DevSquad
     CEO --> DataSquad
@@ -143,4 +152,5 @@ graph TD
     end
     
     Vendas[Vendas<br>1 SDR] --- CEO
+    ```
     
