@@ -68,7 +68,7 @@ gantt
     Treinamento e Campanha      : p9, 2026-07-15, 2026-07-31
 ```
 
-##4. DIAGRAMA DE FASES DO PROJETO
+## 4. DIAGRAMA DE FASES DO PROJETO
 
 Ciclo de vida do projeto orientado por portões de decisão e marcos técnicos:
 ```mermaid
