@@ -131,23 +131,18 @@ classDiagram
 
 ## 7. COMPOSIÇÃO DA EQUIPE (SQUADS FUNCIONAIS)
 Nos primeiros 12 meses, a empresa adota um modelo de squads funcionais enxutos, com hierarquia plana, comunicação direta e regime de trabalho remoto-assíncrono. O escritório físico compartilhado localiza-se nos bairros do Marco ou Batista Campos, em Belém.A equipe é composta por 9 integrantes, divididos da seguinte forma:
+
 ```mermaid
 graph TD
-    CEO[CEO / Founder<br>Visão, Captação e Parcerias] --> DevSquad
-    CEO --> DataSquad
-    COO[COO / Founder<br>Operações e Customer Success] --> OnboardSquad
-    COO --> CS
-    CTO[CTO / Founder<br>Produto, Arquitetura e Segurança] --> DevSquad
-    
-    subgraph Squads
-        DevSquad[Dev Squad<br>2 Devs Full-Stack]
-        DataSquad[Data Squad<br>1 Engenheiro de Dados]
-        OnboardSquad[Onboarding Squad<br>1 Analista de Implantação]
-        CS[Customer Success<br>1 Analista Farmacêutico]
-    end
-    
-    Vendas[Vendas<br>1 SDR] --- CEO
-    ```
+    CEO["CEO / Founder<br>Visão, Captação e Parcerias"] --> DevSquad["Dev Squad<br>2 Devs Full-Stack"]
+    CEO --> DataSquad["Data Squad<br>1 Engenheiro de Dados"]
+    COO["COO / Founder<br>Operações e Customer Success"] --> OnboardSquad["Onboarding Squad<br>1 Analista de Implantação"]
+    COO --> CS["Customer Success<br>1 Analista Farmacêutico"]
+    CTO["CTO / Founder<br>Produto, Arquitetura e Segurança"] --> DevSquad
+    Vendas["Vendas<br>1 SDR"] --- CEO
+
+```
+
 Liderança Executiva:
 
     CEO / Founder: Responsável pela visão de negócio, captação de recursos e parcerias com distribuidoras regionais e o Sindicato dos Farmacêuticos do Pará (Sinfarpa).
