@@ -161,6 +161,7 @@ Estrutura dos Squads:
 
     Vendas (1 SDR): Prospecção activa via WhatsApp e visitas físicas em Belém.
 ```
+```
 ## 8. MODELO DE PRECIFICAÇÃO E RECEITA
 
 O modelo comercial foi estruturado especificamente para o formato SaaS (Software as a Service) B2B, focado na recorrência.
