@@ -85,19 +85,19 @@ stateDiagram-v2
 Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:´
 
 ```mermaid
-graph LR
+usecaseDiagram
     leftToRightDirection
 
-    actor "Administrador Master" as admin
-    actor "Dono de Farmácia" as dono
-    actor "Operador de Onboarding" as cs
-    actor "Sistema de PDV Externo" as pdv
+    actor admin as "Administrador Master"
+    actor dono as "Dono de Farmácia"
+    actor cs as "Operador de Onboarding"
+    actor pdv as "Sistema de PDV Externo"
 
     rectangle "Plataforma PharmaConekt (MVP)" {
         admin --> (Fazer Login)
         dono --> (Fazer Login)
         cs --> (Fazer Login)
-    
+        
         admin --> (Cadastrar Loja)
         admin --> (Listar Lojas)
         dono --> (Ver Dashboard de KPIs)
@@ -106,7 +106,7 @@ graph LR
         cs --> (Atualizar Status da Loja)
         
         pdv --> (Importar Dados de Vendas)
-}
+    }
 ```
 
 ## 6. DIAGRAMA DE CLASSES
