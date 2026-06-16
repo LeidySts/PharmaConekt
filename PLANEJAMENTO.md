@@ -83,13 +83,14 @@ stateDiagram-v2
 ## 5. DIAGRAMA DE CASOS DE USO
 
 Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:´
-```mermaid
 
+    ```mermaid
     leftToRightDirection
     actor "Administrador Master" as admin
     actor "Dono de Farmácia" as dono
     actor "Operador de Onboarding" as cs
     actor "Sistema de PDV Externo" as pdv
+    
     rectangle "Plataforma PharmaConekt (MVP)" {
     admin --> (Fazer Login)
     dono --> (Fazer Login)
