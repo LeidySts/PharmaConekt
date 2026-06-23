@@ -19,7 +19,7 @@ Aqui você pode acompanhar as principais telas e o fluxo de funcionamento do sis
 
 ### 🔐 Tela de Login / Autenticação
 *Interface segura e intuitiva para controle de acesso dos operadores.*
-![Tela de Login](images/TelaLogin.png)
+![Tela de Login](images/TeladeLogin.png)
 
 ### 📝 Módulo de Soluções
 *Formulários dinâmicos e validados para inserção de novos registros no sistema.*
