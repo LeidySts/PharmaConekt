@@ -1,35 +1,34 @@
-# PharmaConekt - Plataforma SaaS de Integração Farmacêutica
+# 💊 PharmaConekt - Gestão Inteligente para Farmácias
 
-Este projeto consiste em um MVP funcional em Flask estruturado para resolver a fragmentação de dados em farmácias independentes e micro-redes.
+O **PharmaConekt** é um sistema web moderno desenvolvido para otimizar e simplificar o gerenciamento operacional de farmácias. A plataforma une uma interface intuitiva a fluxos eficientes para controle de dados, facilitando a rotina de trabalho e melhorando a experiência do usuário final.
 
-## 🚀 Como Executar
+## 🚀 Tecnologias Utilizadas
+* **HTML5** – Estruturação semântica da aplicação.
+* **CSS3** – Design responsivo, moderno e estilização personalizada.
+* **JavaScript (ES6+)** – Dinamismo, manipulação do DOM e comportamentos interativos.
 
-1. Certifique-se de ter o Python instalado.
-2. Instale as dependências executando:
-   ```bash
-   pip install -r requirements.txt
+---
 
-   ## 📸 Demonstração do Sistema
+## 📸 Demonstração Visual (Interface do Sistema)
 
-### 🔐 Tela de Login
-Aqui o usuário insere suas credenciais de administrador para acessar o painel.
-![Login no Sistema](images/TelaLogin.png)
+Aqui você pode acompanhar as principais telas e o fluxo de funcionamento do sistema:
 
+### 🖥️ Tela Principal / Dashboard
+*Visão geral do sistema com acesso rápido às principais funcionalidades.*
+![Tela Principal](images/Inicio.png)
 
-### 🔐 Tela de Login Realizado
-Aqui o usuário já inseriu suas credenciais de administrador para acessar o painel.
-![Login no Sistema](images/Login.png)
+### 🔐 Tela de Login / Autenticação
+*Interface segura e intuitiva para controle de acesso dos operadores.*
+![Tela de Login](images/TelaLogin.png)
 
+### 📝 Módulo de Soluções
+*Formulários dinâmicos e validados para inserção de novos registros no sistema.*
+![Tela de Cadastro](images/soluçoes.png)
 
-### 📊 Painel Principal (Dashboard)
-Após o acesso, o usuário visualiza o controle geral do PharmaConekt.
-![Tela Principal](images/TelaPrincipal.png)
+---
 
-### 🔐 Tela Visualizando 
-Visualização de redes Credenciadas.
-![Login no Sistema](images/cadastro.png)
-### 🔐 Tela de Novo cadastro
-![Login no Sistema](images/novo.png)
+## 🔗 Link do Projeto em Produção
 
-### 🏪 Cadastro de Lojas e Micro-Redes
-![Cadastro de Novas Lojas](images/NovoAdd.png)
+O deploy do projeto foi realizado através do GitHub Pages e pode ser acessado em tempo real:
+
+🌐 [**Clique aqui para acessar o PharmaConekt online**](https://leidysts.github.io/PharmaConekt/)
