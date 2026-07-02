@@ -4047,57 +4047,754 @@
             </div>
         </div>
 
-        <!-- ===== ENTREGAS - MANTIDO ===== -->
-        <div id="client-entregas" class="client-tab" style="display:none;">
-            <h3 style="color:var(--primary); margin-bottom:8px;">🛵 Gerenciador de Entregas</h3>
-            <p style="color:var(--text-muted); margin-bottom:16px;">Gerencie entregas em domicílio de forma eficiente.</p>
 
-            <div class="card-grid">
-                <div class="card-stat">
-                    <div class="number">12</div>
-                    <div class="label">Entregas hoje</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:#e65100;">5</div>
-                    <div class="label">Em andamento</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:var(--secondary);">7</div>
-                    <div class="label">Concluídas</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:#c62828;">0</div>
-                    <div class="label">Atrasadas</div>
-                </div>
-            </div>
 
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr><th>Pedido</th><th>Cliente</th><th>Endereço</th><th>Entregador</th><th>Status</th><th>Ação</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1234</td>
-                            <td>Maria Santos</td>
-                            <td>Rua A, 123</td>
-                            <td>João</td>
-                            <td><span class="status-badge warning">Em andamento</span></td>
-                            <td><button class="btn-secondary btn-sm">Acompanhar</button></td>
-                        </tr>
-                        <tr>
-                            <td>#1235</td>
-                            <td>Carlos Oliveira</td>
-                            <td>Rua B, 456</td>
-                            <td>Pedro</td>
-                            <td><span class="status-badge success">Concluída</span></td>
-                            <td><button class="btn-secondary btn-sm">Detalhes</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <!-- ========================================================== -->
+<!-- ===== GERENCIADOR DE ENTREGAS - PHARMACONEKT ===== -->
+<!-- ========================================================== -->
+
+<div id="client-entregas" class="client-tab" style="display:none;">
+    <!-- ===== CABEÇALHO ===== -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div>
+            <h3 style="color:var(--primary);">🛵 Gerenciador de Entregas</h3>
+            <p style="color:var(--text-muted); font-size:14px;">Gerencie todas as entregas da farmácia em tempo real</p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-success btn-sm" id="openNovaEntregaBtn">➕ Nova Entrega</button>
+            <button class="btn-secondary btn-sm" onclick="gerarRelatorioEntregas()">📊 Relatório</button>
+            <button class="btn-secondary btn-sm" onclick="exportarEntregasCSV()">📄 Exportar CSV</button>
+        </div>
+    </div>
+
+    <!-- ===== DASHBOARD DE MÉTRICAS ===== -->
+    <div class="card-grid" style="margin-bottom:16px;">
+        <div class="card-stat">
+            <div class="number" id="totalEntregas">0</div>
+            <div class="label">📦 Total de Entregas</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:#e65100;" id="entregasPendentes">0</div>
+            <div class="label">⏳ Pendentes</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:#0d47a1;" id="entregasEmAndamento">0</div>
+            <div class="label">🚚 Em Andamento</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:var(--secondary);" id="entregasConcluidas">0</div>
+            <div class="label">✅ Concluídas</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:#c62828;" id="entregasAtrasadas">0</div>
+            <div class="label">⚠️ Atrasadas</div>
+        </div>
+        <div class="card-stat" style="background:#E3F2FD;">
+            <div class="number" style="color:#0d47a1;" id="taxaSucesso">0%</div>
+            <div class="label">📈 Taxa de Sucesso</div>
+        </div>
+    </div>
+
+    <!-- ===== FILTROS ===== -->
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:16px; align-items:center; background:var(--bg-light); padding:12px 16px; border-radius:var(--radius);">
+        <span style="font-weight:600; font-size:13px;">🔍 Filtros:</span>
+        <select id="filtroStatusEntrega" style="padding:6px 12px; border:2px solid #d5dde8; border-radius:8px; font-size:13px; background:#fff;">
+            <option value="">Todos os status</option>
+            <option value="Pendente">⏳ Pendente</option>
+            <option value="Em andamento">🚚 Em Andamento</option>
+            <option value="Concluída">✅ Concluída</option>
+            <option value="Atrasada">⚠️ Atrasada</option>
+            <option value="Cancelada">❌ Cancelada</option>
+        </select>
+        <input type="date" id="filtroDataInicio" style="padding:6px 12px; border:2px solid #d5dde8; border-radius:8px; font-size:13px;">
+        <span style="font-size:13px;">até</span>
+        <input type="date" id="filtroDataFim" style="padding:6px 12px; border:2px solid #d5dde8; border-radius:8px; font-size:13px;">
+        <button class="btn-primary btn-sm" id="btnFiltrarEntregas">🔍 Filtrar</button>
+        <button class="btn-secondary btn-sm" id="btnLimparFiltrosEntregas">🗑️ Limpar</button>
+        <span style="margin-left:auto; font-size:12px; color:var(--text-muted);" id="totalEntregasFiltradas">Mostrando: 0 entregas</span>
+    </div>
+
+    <!-- ===== TABELA DE ENTREGAS ===== -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th># Pedido</th>
+                    <th>Cliente</th>
+                    <th>Produto</th>
+                    <th>Entregador</th>
+                    <th>Endereço</th>
+                    <th>Data/Hora</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="entregasTableBody">
+                <!-- Preenchido via JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ===== PAGINAÇÃO ===== -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:12px;">
+        <span style="font-size:13px; color:var(--text-muted);" id="entregasPaginacaoInfo">Mostrando 1-10 de 0 entregas</span>
+        <div style="display:flex; gap:4px;">
+            <button class="btn-secondary btn-sm" id="btnPaginaAnterior" onclick="paginaAnterior()">◀ Anterior</button>
+            <span style="padding:4px 12px; background:var(--bg-light); border-radius:4px; font-size:13px;" id="paginaAtual">1</span>
+            <button class="btn-secondary btn-sm" id="btnProximaPagina" onclick="proximaPagina()">Próxima ▶</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- ===== MODAL NOVA ENTREGA ===== -->
+<!-- ========================================================== -->
+
+<div class="modal-overlay" id="novaEntregaModal">
+    <div class="modal-cadastro" style="max-width:560px;">
+        <button class="close-modal" id="closeNovaEntregaModal">&times;</button>
+        <h3>🛵 Nova Entrega</h3>
+        <div class="subtitle" style="color:var(--text-muted); font-size:14px; margin-bottom:12px;">Cadastre uma nova entrega para o cliente</div>
+
+        <div class="form-group">
+            <label>Cliente <span style="color:#c62828;">*</span></label>
+            <input type="text" id="novaEntregaCliente" placeholder="Ex: Maria Santos">
+        </div>
+        <div class="form-group">
+            <label>Telefone <span style="color:#c62828;">*</span></label>
+            <input type="text" id="novaEntregaTelefone" placeholder="Ex: (91) 99999-9999">
+        </div>
+        <div class="form-group">
+            <label>Endereço de Entrega <span style="color:#c62828;">*</span></label>
+            <input type="text" id="novaEntregaEndereco" placeholder="Ex: Rua das Flores, 123, Belém/PA">
+        </div>
+        <div class="form-group">
+            <label>Produto(s) <span style="color:#c62828;">*</span></label>
+            <input type="text" id="novaEntregaProduto" placeholder="Ex: Paracetamol 500mg, Dipirona 1g">
+        </div>
+        <div class="form-group">
+            <label>Entregador <span style="color:#c62828;">*</span></label>
+            <select id="novaEntregaEntregador">
+                <option value="">Selecione um entregador</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Valor da Entrega</label>
+            <input type="number" id="novaEntregaValor" step="0.01" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label>Prazo (horas)</label>
+            <input type="number" id="novaEntregaPrazo" placeholder="2" value="2">
+        </div>
+        <div class="form-group">
+            <label>Observações</label>
+            <textarea id="novaEntregaObs" rows="2" placeholder="Informações adicionais (opcional)" style="width:100%; padding:8px 12px; border:2px solid #d5dde8; border-radius:8px; font-size:14px; resize:vertical;"></textarea>
         </div>
 
+        <button class="btn-cadastro-confirm" id="confirmNovaEntrega" style="width:100%; padding:12px; border:none; border-radius:30px; background:var(--secondary); color:#fff; font-weight:700; font-size:16px; cursor:pointer; transition:var(--transition);">✅ Cadastrar Entrega</button>
+        <button class="btn-cadastro-cancel" id="cancelNovaEntrega" style="width:100%; padding:10px; border:2px solid #d5dde8; border-radius:30px; background:transparent; color:var(--text-dark); font-weight:600; cursor:pointer; transition:var(--transition); margin-top:8px;">✖️ Cancelar</button>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- ===== MODAL DETALHES DA ENTREGA ===== -->
+<!-- ========================================================== -->
+
+<div class="modal-overlay" id="detalhesEntregaModal">
+    <div class="modal-cadastro" style="max-width:520px;">
+        <button class="close-modal" id="closeDetalhesEntregaModal">&times;</button>
+        <h3 id="detalhesEntregaTitulo">📋 Detalhes da Entrega #PDV-001</h3>
+        <div style="margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:8px; background:var(--bg-light); padding:16px; border-radius:var(--radius);">
+            <div><strong>Cliente:</strong> <span id="detalhesCliente">Maria Santos</span></div>
+            <div><strong>Telefone:</strong> <span id="detalhesTelefone">(91) 99999-9999</span></div>
+            <div style="grid-column: span 2;"><strong>Endereço:</strong> <span id="detalhesEndereco">Rua das Flores, 123</span></div>
+            <div><strong>Produto:</strong> <span id="detalhesProduto">Paracetamol 500mg</span></div>
+            <div><strong>Valor:</strong> <span id="detalhesValor">R$ 8,50</span></div>
+            <div><strong>Entregador:</strong> <span id="detalhesEntregador">João Silva</span></div>
+            <div><strong>Status:</strong> <span id="detalhesStatus">✅ Concluída</span></div>
+            <div><strong>Data/Hora:</strong> <span id="detalhesData">10/06/2026 14:35</span></div>
+            <div><strong>Prazo:</strong> <span id="detalhesPrazo">2 horas</span></div>
+            <div style="grid-column: span 2;"><strong>Observações:</strong> <span id="detalhesObs">Nenhuma</span></div>
+            <div style="grid-column: span 2; border-top:1px solid #e8edf4; padding-top:8px;">
+                <strong>📊 Histórico de Status:</strong>
+                <div id="detalhesHistorico" style="font-size:12px; color:var(--text-muted); margin-top:4px;">
+                    <div>• 10/06 14:35 - Concluída</div>
+                    <div>• 10/06 14:00 - Em andamento</div>
+                    <div>• 10/06 13:30 - Pendente</div>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+            <button class="btn-secondary btn-sm" id="detalhesAtualizarStatus">🔄 Atualizar Status</button>
+            <button class="btn-danger btn-sm" id="detalhesCancelarEntrega">❌ Cancelar Entrega</button>
+            <button class="btn-comprovante-print btn-sm" onclick="imprimirDetalhesEntrega()">🖨️ Imprimir</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- ===== CSS COMPLEMENTAR ===== -->
+<!-- ========================================================== -->
+
+<style>
+    .entregas-table tr {
+        transition: var(--transition);
+    }
+    .entregas-table tr:hover td {
+        background: #f8fafc;
+    }
+    .status-badge {
+        display: inline-block;
+        padding: 2px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .status-badge.pendente { background: #fff3e0; color: #e65100; }
+    .status-badge.em-andamento { background: #e3f2fd; color: #0d47a1; }
+    .status-badge.concluida { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.atrasada { background: #ffebee; color: #c62828; }
+    .status-badge.cancelada { background: #f5f5f5; color: #424242; }
+</style>
+
+<!-- ========================================================== -->
+<!-- ===== JAVASCRIPT COMPLETO ===== -->
+<!-- ========================================================== -->
+
+<script>
+    // ================================================================
+    // ===== DADOS DE ENTREGAS =====
+    // ================================================================
+
+    var entregasData = [];
+    var entregadores = ['João Silva', 'Maria Souza', 'Carlos Pereira', 'Ana Santos', 'Pedro Oliveira'];
+    var clientesMock = ['Maria Santos', 'Carlos Lima', 'Ana Souza', 'João Pereira', 'Fernanda Costa', 'Rafael Oliveira', 'Patrícia Silva', 'Lucas Mendes'];
+    var produtosMock = ['Paracetamol 500mg', 'Dipirona 1g', 'Ibuprofeno 600mg', 'Amoxicilina 500mg', 'Whey Protein', 'Shampoo Anticaspa', 'Fralda P', 'Curativo Adesivo'];
+    var enderecosMock = [
+        'Rua das Flores, 123, Belém/PA',
+        'Travessa Quintino, 456, Batista Campos, Belém/PA',
+        'Rodovia BR-316, 789, Ananindeua/PA',
+        'Rua dos Ipês, 321, Marco, Belém/PA',
+        'Avenida Principal, 1000, Castanhal/PA'
+    ];
+
+    var paginaAtualEntregas = 1;
+    var itensPorPagina = 10;
+    var entregaIdCounter = 1;
+    var entregaAtualId = null;
+
+    // ================================================================
+    // ===== FUNÇÕES DE INICIALIZAÇÃO =====
+    // ================================================================
+
+    function initEntregas() {
+        // Carrega dados mockados se estiver vazio
+        if (entregasData.length === 0) {
+            carregarDadosMock();
+        }
+        renderizarEntregas();
+        atualizarMetricas();
+        preencherEntregadores();
+    }
+
+    function carregarDadosMock() {
+        var statuses = ['Pendente', 'Em andamento', 'Concluída', 'Atrasada', 'Cancelada'];
+        var statusColors = ['pendente', 'em-andamento', 'concluida', 'atrasada', 'cancelada'];
+        var now = new Date();
+
+        for (var i = 0; i < 25; i++) {
+            var statusIndex = Math.floor(Math.random() * 5);
+            var status = statuses[statusIndex];
+            var data = new Date(now);
+            data.setHours(data.getHours() - Math.floor(Math.random() * 24));
+            data.setMinutes(Math.floor(Math.random() * 60));
+
+            var entrega = {
+                id: entregaIdCounter++,
+                pedido: '#PDV-' + String(2026001 + i).padStart(3, '0'),
+                cliente: clientesMock[Math.floor(Math.random() * clientesMock.length)],
+                telefone: '(91) 9' + String(Math.floor(1000 + Math.random() * 9000)) + '-' + String(Math.floor(1000 + Math.random() * 9000)),
+                endereco: enderecosMock[Math.floor(Math.random() * enderecosMock.length)],
+                produto: produtosMock[Math.floor(Math.random() * produtosMock.length)],
+                entregador: entregadores[Math.floor(Math.random() * entregadores.length)],
+                valor: Math.round((Math.random() * 50 + 5) * 100) / 100,
+                status: status,
+                statusClass: statusColors[statusIndex],
+                data: data.toLocaleDateString('pt-BR'),
+                hora: data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                dataTimestamp: data.getTime(),
+                prazo: Math.floor(Math.random() * 4) + 1,
+                observacoes: Math.random() > 0.7 ? 'Cliente solicitou entrega rápida' : 'Nenhuma',
+                historico: [
+                    { status: status, data: data.toLocaleDateString('pt-BR'), hora: data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) }
+                ]
+            };
+
+            // Adiciona histórico adicional para entregas concluídas
+            if (status === 'Concluída' || status === 'Atrasada') {
+                var dataAnt = new Date(data);
+                dataAnt.setMinutes(dataAnt.getMinutes() - 30);
+                entrega.historico.push({
+                    status: 'Em andamento',
+                    data: dataAnt.toLocaleDateString('pt-BR'),
+                    hora: dataAnt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                });
+                var dataAnt2 = new Date(dataAnt);
+                dataAnt2.setMinutes(dataAnt2.getMinutes() - 30);
+                entrega.historico.push({
+                    status: 'Pendente',
+                    data: dataAnt2.toLocaleDateString('pt-BR'),
+                    hora: dataAnt2.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                });
+                entrega.historico.reverse();
+            }
+
+            entregasData.push(entrega);
+        }
+    }
+
+    function preencherEntregadores() {
+        var select = document.getElementById('novaEntregaEntregador');
+        if (!select) return;
+        select.innerHTML = '<option value="">Selecione um entregador</option>';
+        entregadores.forEach(function(e) {
+            select.innerHTML += '<option value="' + e + '">' + e + '</option>';
+        });
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DE RENDERIZAÇÃO =====
+    // ================================================================
+
+    function renderizarEntregas() {
+        var statusFiltro = document.getElementById('filtroStatusEntrega').value;
+        var dataInicio = document.getElementById('filtroDataInicio').value;
+        var dataFim = document.getElementById('filtroDataFim').value;
+
+        var dadosFiltrados = entregasData.filter(function(entrega) {
+            // Filtro por status
+            if (statusFiltro && entrega.status !== statusFiltro) return false;
+
+            // Filtro por data
+            if (dataInicio) {
+                var dataEntrega = new Date(entrega.dataTimestamp);
+                var dataInicioObj = new Date(dataInicio);
+                dataInicioObj.setHours(0, 0, 0, 0);
+                if (dataEntrega < dataInicioObj) return false;
+            }
+            if (dataFim) {
+                var dataEntrega2 = new Date(entrega.dataTimestamp);
+                var dataFimObj = new Date(dataFim);
+                dataFimObj.setHours(23, 59, 59, 999);
+                if (dataEntrega2 > dataFimObj) return false;
+            }
+
+            return true;
+        });
+
+        // Ordena por data (mais recente primeiro)
+        dadosFiltrados.sort(function(a, b) {
+            return b.dataTimestamp - a.dataTimestamp;
+        });
+
+        var total = dadosFiltrados.length;
+        var totalPaginas = Math.ceil(total / itensPorPagina);
+        if (paginaAtualEntregas > totalPaginas) paginaAtualEntregas = 1;
+        if (paginaAtualEntregas < 1) paginaAtualEntregas = 1;
+
+        var inicio = (paginaAtualEntregas - 1) * itensPorPagina;
+        var fim = Math.min(inicio + itensPorPagina, total);
+        var paginaDados = dadosFiltrados.slice(inicio, fim);
+
+        var tbody = document.getElementById('entregasTableBody');
+        if (!tbody) return;
+
+        if (paginaDados.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="8" style="text-align:center; color:var(--text-muted); padding:30px;">
+                        <div style="font-size:48px; margin-bottom:8px;">🛵</div>
+                        Nenhuma entrega encontrada<br>
+                        <span style="font-size:13px;">Clique em "Nova Entrega" para cadastrar</span>
+                    </td>
+                </tr>
+            `;
+        } else {
+            var html = '';
+            paginaDados.forEach(function(entrega) {
+                var statusLabels = {
+                    'Pendente': '⏳ Pendente',
+                    'Em andamento': '🚚 Em andamento',
+                    'Concluída': '✅ Concluída',
+                    'Atrasada': '⚠️ Atrasada',
+                    'Cancelada': '❌ Cancelada'
+                };
+                html += `
+                    <tr class="entregas-table">
+                        <td><strong>${entrega.pedido}</strong></td>
+                        <td>${entrega.cliente}</td>
+                        <td>${entrega.produto}</td>
+                        <td>${entrega.entregador}</td>
+                        <td style="font-size:12px; color:var(--text-muted);">${entrega.endereco.substring(0, 25)}${entrega.endereco.length > 25 ? '...' : ''}</td>
+                        <td style="font-size:12px;">${entrega.data} ${entrega.hora}</td>
+                        <td><span class="status-badge ${entrega.statusClass}">${statusLabels[entrega.status] || entrega.status}</span></td>
+                        <td>
+                            <button class="btn-secondary btn-sm" onclick="verDetalhesEntrega(${entrega.id})">📋</button>
+                            <button class="btn-success btn-sm" onclick="atualizarStatusEntrega(${entrega.id})">🔄</button>
+                            <button class="btn-danger btn-sm" onclick="cancelarEntrega(${entrega.id})">✕</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // Atualiza informações de paginação
+        document.getElementById('entregasPaginacaoInfo').textContent =
+            'Mostrando ' + (total > 0 ? inicio + 1 : 0) + '-' + fim + ' de ' + total + ' entregas';
+        document.getElementById('paginaAtual').textContent = paginaAtualEntregas;
+        document.getElementById('totalEntregasFiltradas').textContent = 'Mostrando: ' + total + ' entregas';
+
+        // Controles de paginação
+        document.getElementById('btnPaginaAnterior').disabled = paginaAtualEntregas <= 1;
+        document.getElementById('btnProximaPagina').disabled = paginaAtualEntregas >= totalPaginas;
+    }
+
+    function atualizarMetricas() {
+        var total = entregasData.length;
+        var pendentes = entregasData.filter(function(e) { return e.status === 'Pendente'; }).length;
+        var emAndamento = entregasData.filter(function(e) { return e.status === 'Em andamento'; }).length;
+        var concluidas = entregasData.filter(function(e) { return e.status === 'Concluída'; }).length;
+        var atrasadas = entregasData.filter(function(e) { return e.status === 'Atrasada'; }).length;
+        var taxaSucesso = total > 0 ? Math.round((concluidas / total) * 100) : 0;
+
+        document.getElementById('totalEntregas').textContent = total;
+        document.getElementById('entregasPendentes').textContent = pendentes;
+        document.getElementById('entregasEmAndamento').textContent = emAndamento;
+        document.getElementById('entregasConcluidas').textContent = concluidas;
+        document.getElementById('entregasAtrasadas').textContent = atrasadas;
+        document.getElementById('taxaSucesso').textContent = taxaSucesso + '%';
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DE NAVEGAÇÃO =====
+    // ================================================================
+
+    function paginaAnterior() {
+        if (paginaAtualEntregas > 1) {
+            paginaAtualEntregas--;
+            renderizarEntregas();
+        }
+    }
+
+    function proximaPagina() {
+        var total = entregasData.length;
+        var totalPaginas = Math.ceil(total / itensPorPagina);
+        if (paginaAtualEntregas < totalPaginas) {
+            paginaAtualEntregas++;
+            renderizarEntregas();
+        }
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DE CRUD =====
+    // ================================================================
+
+    function cadastrarEntrega() {
+        var cliente = document.getElementById('novaEntregaCliente').value.trim();
+        var telefone = document.getElementById('novaEntregaTelefone').value.trim();
+        var endereco = document.getElementById('novaEntregaEndereco').value.trim();
+        var produto = document.getElementById('novaEntregaProduto').value.trim();
+        var entregador = document.getElementById('novaEntregaEntregador').value;
+        var valor = parseFloat(document.getElementById('novaEntregaValor').value) || 0;
+        var prazo = parseInt(document.getElementById('novaEntregaPrazo').value) || 2;
+        var obs = document.getElementById('novaEntregaObs').value.trim();
+
+        if (!cliente || !telefone || !endereco || !produto || !entregador) {
+            alert('⚠️ Preencha todos os campos obrigatórios.');
+            return;
+        }
+
+        var now = new Date();
+        var novaEntrega = {
+            id: entregaIdCounter++,
+            pedido: '#PDV-' + String(2026001 + entregasData.length + 1).padStart(3, '0'),
+            cliente: cliente,
+            telefone: telefone,
+            endereco: endereco,
+            produto: produto,
+            entregador: entregador,
+            valor: valor,
+            status: 'Pendente',
+            statusClass: 'pendente',
+            data: now.toLocaleDateString('pt-BR'),
+            hora: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+            dataTimestamp: now.getTime(),
+            prazo: prazo,
+            observacoes: obs || 'Nenhuma',
+            historico: [
+                { status: 'Pendente', data: now.toLocaleDateString('pt-BR'), hora: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) }
+            ]
+        };
+
+        entregasData.push(novaEntrega);
+        document.getElementById('novaEntregaModal').classList.remove('active');
+        renderizarEntregas();
+        atualizarMetricas();
+        alert('✅ Entrega cadastrada com sucesso!\n\n' +
+              '📦 Pedido: ' + novaEntrega.pedido + '\n' +
+              '👤 Cliente: ' + cliente + '\n' +
+              '🛵 Entregador: ' + entregador + '\n' +
+              '📅 Prazo: ' + prazo + ' horas');
+
+        // Limpa o formulário
+        document.getElementById('novaEntregaCliente').value = '';
+        document.getElementById('novaEntregaTelefone').value = '';
+        document.getElementById('novaEntregaEndereco').value = '';
+        document.getElementById('novaEntregaProduto').value = '';
+        document.getElementById('novaEntregaValor').value = '';
+        document.getElementById('novaEntregaPrazo').value = '2';
+        document.getElementById('novaEntregaObs').value = '';
+    }
+
+    function verDetalhesEntrega(id) {
+        var entrega = entregasData.find(function(e) { return e.id === id; });
+        if (!entrega) return;
+
+        entregaAtualId = id;
+        document.getElementById('detalhesEntregaTitulo').textContent = '📋 Detalhes da Entrega ' + entrega.pedido;
+        document.getElementById('detalhesCliente').textContent = entrega.cliente;
+        document.getElementById('detalhesTelefone').textContent = entrega.telefone;
+        document.getElementById('detalhesEndereco').textContent = entrega.endereco;
+        document.getElementById('detalhesProduto').textContent = entrega.produto;
+        document.getElementById('detalhesValor').textContent = 'R$ ' + entrega.valor.toFixed(2);
+        document.getElementById('detalhesEntregador').textContent = entrega.entregador;
+        document.getElementById('detalhesStatus').textContent = entrega.status;
+        document.getElementById('detalhesData').textContent = entrega.data + ' ' + entrega.hora;
+        document.getElementById('detalhesPrazo').textContent = entrega.prazo + ' horas';
+        document.getElementById('detalhesObs').textContent = entrega.observacoes;
+
+        // Histórico
+        var historicoHtml = '';
+        if (entrega.historico) {
+            entrega.historico.forEach(function(h) {
+                historicoHtml += '<div>• ' + h.data + ' ' + h.hora + ' - ' + h.status + '</div>';
+            });
+        }
+        document.getElementById('detalhesHistorico').innerHTML = historicoHtml || 'Nenhum histórico disponível';
+
+        document.getElementById('detalhesEntregaModal').classList.add('active');
+    }
+
+    function atualizarStatusEntrega(id) {
+        var entrega = entregasData.find(function(e) { return e.id === id; });
+        if (!entrega) return;
+
+        var statuses = ['Pendente', 'Em andamento', 'Concluída'];
+        var currentIndex = statuses.indexOf(entrega.status);
+        if (currentIndex === -1) currentIndex = 0;
+        var nextIndex = (currentIndex + 1) % statuses.length;
+        var novoStatus = statuses[nextIndex];
+
+        // Se for 'Atrasada' ou 'Cancelada', volta para 'Pendente'
+        if (entrega.status === 'Atrasada' || entrega.status === 'Cancelada') {
+            novoStatus = 'Pendente';
+        }
+
+        var statusMap = {
+            'Pendente': 'pendente',
+            'Em andamento': 'em-andamento',
+            'Concluída': 'concluida',
+            'Atrasada': 'atrasada',
+            'Cancelada': 'cancelada'
+        };
+
+        entrega.status = novoStatus;
+        entrega.statusClass = statusMap[novoStatus];
+
+        // Adiciona ao histórico
+        var now = new Date();
+        entrega.historico.push({
+            status: novoStatus,
+            data: now.toLocaleDateString('pt-BR'),
+            hora: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+        });
+
+        renderizarEntregas();
+        atualizarMetricas();
+
+        // Se estiver no modal de detalhes, atualiza
+        if (document.getElementById('detalhesEntregaModal').classList.contains('active')) {
+            verDetalhesEntrega(id);
+        }
+
+        alert('🔄 Status da entrega ' + entrega.pedido + ' atualizado para: ' + novoStatus);
+    }
+
+    function cancelarEntrega(id) {
+        if (!confirm('❌ Deseja realmente cancelar esta entrega?')) return;
+
+        var entrega = entregasData.find(function(e) { return e.id === id; });
+        if (!entrega) return;
+
+        entrega.status = 'Cancelada';
+        entrega.statusClass = 'cancelada';
+
+        var now = new Date();
+        entrega.historico.push({
+            status: 'Cancelada',
+            data: now.toLocaleDateString('pt-BR'),
+            hora: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+        });
+
+        renderizarEntregas();
+        atualizarMetricas();
+
+        if (document.getElementById('detalhesEntregaModal').classList.contains('active')) {
+            document.getElementById('detalhesEntregaModal').classList.remove('active');
+        }
+
+        alert('❌ Entrega ' + entrega.pedido + ' cancelada com sucesso!');
+    }
+
+    function imprimirDetalhesEntrega() {
+        var cliente = document.getElementById('detalhesCliente').textContent;
+        var endereco = document.getElementById('detalhesEndereco').textContent;
+        var produto = document.getElementById('detalhesProduto').textContent;
+        var entregador = document.getElementById('detalhesEntregador').textContent;
+
+        alert('🖨️ Imprimindo comprovante da entrega\n\n' +
+              '👤 Cliente: ' + cliente + '\n' +
+              '📍 Endereço: ' + endereco + '\n' +
+              '📦 Produto: ' + produto + '\n' +
+              '🛵 Entregador: ' + entregador + '\n' +
+              '📅 Data: ' + new Date().toLocaleDateString('pt-BR'));
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DE RELATÓRIO E EXPORTAÇÃO =====
+    // ================================================================
+
+    function gerarRelatorioEntregas() {
+        var total = entregasData.length;
+        var pendentes = entregasData.filter(function(e) { return e.status === 'Pendente'; }).length;
+        var emAndamento = entregasData.filter(function(e) { return e.status === 'Em andamento'; }).length;
+        var concluidas = entregasData.filter(function(e) { return e.status === 'Concluída'; }).length;
+        var atrasadas = entregasData.filter(function(e) { return e.status === 'Atrasada'; }).length;
+        var canceladas = entregasData.filter(function(e) { return e.status === 'Cancelada'; }).length;
+        var taxaSucesso = total > 0 ? Math.round((concluidas / total) * 100) : 0;
+
+        alert('📊 RELATÓRIO DE ENTREGAS\n' +
+              '================================\n\n' +
+              '📦 Total de entregas: ' + total + '\n' +
+              '⏳ Pendentes: ' + pendentes + '\n' +
+              '🚚 Em andamento: ' + emAndamento + '\n' +
+              '✅ Concluídas: ' + concluidas + '\n' +
+              '⚠️ Atrasadas: ' + atrasadas + '\n' +
+              '❌ Canceladas: ' + canceladas + '\n\n' +
+              '📈 Taxa de sucesso: ' + taxaSucesso + '%\n' +
+              '📅 Gerado em: ' + new Date().toLocaleString('pt-BR'));
+    }
+
+    function exportarEntregasCSV() {
+        if (entregasData.length === 0) {
+            alert('⚠️ Nenhuma entrega para exportar.');
+            return;
+        }
+
+        var csv = 'Pedido,Cliente,Telefone,Endereço,Produto,Entregador,Valor,Status,Data,Hora\n';
+        entregasData.forEach(function(e) {
+            csv += e.pedido + ',' +
+                   e.cliente + ',' +
+                   e.telefone + ',' +
+                   '"' + e.endereco + '",' +
+                   e.produto + ',' +
+                   e.entregador + ',' +
+                   e.valor.toFixed(2) + ',' +
+                   e.status + ',' +
+                   e.data + ',' +
+                   e.hora + '\n';
+        });
+
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'relatorio_entregas_' + new Date().toISOString().split('T')[0] + '.csv';
+        link.click();
+        URL.revokeObjectURL(link.href);
+    }
+
+    // ================================================================
+    // ===== EVENTOS =====
+    // ================================================================
+
+    // Abrir modal nova entrega
+    document.getElementById('openNovaEntregaBtn').addEventListener('click', function() {
+        preencherEntregadores();
+        document.getElementById('novaEntregaModal').classList.add('active');
+    });
+
+    // Fechar modais
+    document.getElementById('closeNovaEntregaModal').addEventListener('click', function() {
+        document.getElementById('novaEntregaModal').classList.remove('active');
+    });
+    document.getElementById('cancelNovaEntrega').addEventListener('click', function() {
+        document.getElementById('novaEntregaModal').classList.remove('active');
+    });
+    document.getElementById('closeDetalhesEntregaModal').addEventListener('click', function() {
+        document.getElementById('detalhesEntregaModal').classList.remove('active');
+    });
+
+    // Confirmar nova entrega
+    document.getElementById('confirmNovaEntrega').addEventListener('click', cadastrarEntrega);
+
+    // Atualizar status do modal de detalhes
+    document.getElementById('detalhesAtualizarStatus').addEventListener('click', function() {
+        if (entregaAtualId) {
+            atualizarStatusEntrega(entregaAtualId);
+        }
+    });
+
+    // Cancelar entrega do modal de detalhes
+    document.getElementById('detalhesCancelarEntrega').addEventListener('click', function() {
+        if (entregaAtualId) {
+            cancelarEntrega(entregaAtualId);
+        }
+    });
+
+    // Filtros
+    document.getElementById('btnFiltrarEntregas').addEventListener('click', function() {
+        paginaAtualEntregas = 1;
+        renderizarEntregas();
+    });
+
+    document.getElementById('btnLimparFiltrosEntregas').addEventListener('click', function() {
+        document.getElementById('filtroStatusEntrega').value = '';
+        document.getElementById('filtroDataInicio').value = '';
+        document.getElementById('filtroDataFim').value = '';
+        paginaAtualEntregas = 1;
+        renderizarEntregas();
+    });
+
+    // Fechar modais ao clicar fora
+    document.getElementById('novaEntregaModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+        }
+    });
+
+    document.getElementById('detalhesEntregaModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+        }
+    });
+
+    // ================================================================
+    // ===== INICIALIZAÇÃO =====
+    // ================================================================
+
+    document.addEventListener('DOMContentLoaded', initEntregas);
+</script>
         <!-- ===== COMISSÕES - MANTIDO ===== -->
         <div id="client-comissoes" class="client-tab" style="display:none;">
             <h3 style="color:var(--primary); margin-bottom:8px;">💰 Gerenciamento de Comissões</h3>
