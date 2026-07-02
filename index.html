@@ -2825,81 +2825,580 @@
             <a data-client="onebot">🤖 OneBot</a>
         </div>
 
-        <!-- ===== DASHBOARD - COM NOVOS CARDS ===== -->
-        <div id="client-dashboard" class="client-tab active-client-tab">
-            <h3 style="color:var(--primary); margin-bottom:12px;">📊 Dashboard – Farmácia ABC</h3>
-            <p style="color:var(--text-muted); margin-bottom:16px;">Resumo operacional em tempo real. Dados atualizados automaticamente.</p>
 
-            <div class="card-grid">
-                <div class="card-stat">
-                    <div class="number">R$ 1.450</div>
-                    <div class="label">Vendas de hoje</div>
-                    <span class="trend-up">↑ 8% vs ontem</span>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:#c62828;">3</div>
-                    <div class="label">⚠️ Estoque crítico</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:#e65100;">8</div>
-                    <div class="label">🔔 Vencimentos próximos</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:#0d47a1;">2</div>
-                    <div class="label">🔄 Transferências sugeridas</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:var(--secondary);">3</div>
-                    <div class="label">🖥️ Caixas ativos</div>
-                    <span style="font-size:12px; color:var(--text-muted);">de 4 disponíveis</span>
-                </div>
-                <!-- NOVO: Card de Fidelidade -->
-                <div class="card-stat" style="background: #FFF8E1;">
-                    <div class="number" style="color:var(--gold);">⭐ 1.247</div>
-                    <div class="label">Pontos acumulados</div>
-                    <span style="font-size:12px; color:var(--text-muted);">Nível: <strong style="color:var(--silver);">Prata</strong></span>
-                </div>
-                <!-- NOVO: Card de Insight -->
-                <div class="card-stat" style="background: #E3F2FD;">
-                    <div class="number" style="color:#0d47a1;">R$ 8,90</div>
-                    <div class="label">Preço sugerido (médio)</div>
-                    <span style="font-size:12px; color:var(--text-muted);">📈 +5% de margem</span>
-                </div>
-                <!-- NOVO: Card de Alertas -->
-                <div class="card-stat" style="background: #FFF3E0;">
-                    <div class="number" style="color:#e65100;">5</div>
-                    <div class="label">🔔 Alertas ativos</div>
-                    <span style="font-size:12px; color:var(--text-muted);">⚠️ 3 precisam de atenção</span>
-                </div>
+
+
+        <!-- ========================================================== -->
+<!-- ===== DASHBOARD COMPLETO - FARMÁCIA ABC ===== -->
+<!-- ========================================================== -->
+
+<div id="client-dashboard" class="client-tab active-client-tab">
+
+    <!-- ===== CABEÇALHO ===== -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div>
+            <h3 style="color:var(--primary); font-size:22px;">📊 Farmácia ABC - Dashboard</h3>
+            <p style="color:var(--text-muted); font-size:13px;">Visão completa do negócio em tempo real</p>
+        </div>
+        <div style="display:flex; gap:6px; background:var(--bg-light); padding:4px; border-radius:30px; flex-wrap:wrap;">
+            <span style="padding:4px 14px; border-radius:30px; background:var(--primary); color:#fff; font-size:12px; font-weight:600; cursor:pointer;">2021</span>
+            <span style="padding:4px 14px; border-radius:30px; font-size:12px; font-weight:600; cursor:pointer; color:var(--text-muted);">2022</span>
+            <span style="padding:4px 14px; border-radius:30px; font-size:12px; font-weight:600; cursor:pointer; color:var(--text-muted);">2023</span>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ===== DASHBOARD ESTRATÉGICO ===== -->
+    <!-- ========================================================== -->
+    <div style="margin-bottom:20px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="font-size:20px;">🎯</span>
+            <h4 style="color:var(--primary); font-size:16px;">Dashboard Estratégico</h4>
+            <span style="font-size:11px; color:var(--text-muted); background:var(--bg-light); padding:2px 10px; border-radius:12px;">Visão Global do Negócio</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:12px;">
+            <!-- Card: Total de Receitas -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px; border-left:4px solid var(--primary);">
+                <div style="font-size:12px; color:var(--text-muted);">💰 Total de Receitas</div>
+                <div style="font-size:28px; font-weight:700; color:var(--primary);">R$ 31,9K</div>
+                <div style="font-size:12px; color:var(--secondary);">↑ 12% vs mês anterior</div>
             </div>
 
-            <!-- Alertas no Dashboard - NOVO -->
-            <div style="margin:12px 0;">
-                <h4 style="color:var(--primary); font-size:14px;">🔔 Alertas Inteligentes</h4>
-                <div class="alert-banner warning">
-                    <span class="alert-icon">⚠️</span>
-                    <div class="alert-text"><strong>Vencimento próximo:</strong> 3 produtos vencem em 7 dias.</div>
-                </div>
-                <div class="alert-banner">
-                    <span class="alert-icon">💡</span>
-                    <div class="alert-text"><strong>Oportunidade:</strong> 2 produtos podem ter preço otimizado.</div>
-                </div>
-                <div class="alert-banner success">
-                    <span class="alert-icon">⭐</span>
-                    <div class="alert-text"><strong>Fidelidade:</strong> 5 clientes estão próximos do próximo nível.</div>
-                </div>
+            <!-- Card: Total de Vendas -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px; border-left:4px solid var(--secondary);">
+                <div style="font-size:12px; color:var(--text-muted);">📦 Total de Vendas</div>
+                <div style="font-size:28px; font-weight:700; color:var(--secondary);">R$ 11,1K</div>
+                <div style="font-size:12px; color:var(--secondary);">↑ 8% vs mês anterior</div>
             </div>
 
-            <div style="display:flex; flex-wrap:wrap; gap:12px; margin:16px 0 20px;">
-                <button class="btn-primary btn-sm" data-client="pdv">🛒 Nova Venda</button>
-                <button class="btn-gold btn-sm" data-client="fidelidade">⭐ Programa de Pontos</button>
-                <button class="btn-secondary btn-sm" data-client="insights">📊 Insights de Mercado</button>
-                <button class="btn-outline btn-sm" data-client="alertas">🔔 Ver Alertas</button>
-                <button class="btn-success btn-sm" data-client="multiloja">🏢 Multi Lojas</button>
-                <button class="btn-outline btn-sm" data-client="caixas">🖥️ Gerenciar Caixas</button>
-                <button class="btn-outline btn-sm" data-client="entregas">🛵 Nova Entrega</button>
+            <!-- Card: Transações -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px; border-left:4px solid var(--accent);">
+                <div style="font-size:12px; color:var(--text-muted);">🔄 Transações</div>
+                <div style="font-size:28px; font-weight:700; color:var(--accent);">2.977</div>
+                <div style="font-size:12px; color:var(--secondary);">↑ 15% vs mês anterior</div>
+            </div>
+
+            <!-- Card: Ticket Médio -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px; border-left:4px solid #6a1b9a;">
+                <div style="font-size:12px; color:var(--text-muted);">🏷️ Ticket Médio</div>
+                <div style="font-size:28px; font-weight:700; color:#6a1b9a;">R$ 120,83</div>
+                <div style="font-size:12px; color:var(--secondary);">↑ 3% vs mês anterior</div>
+            </div>
+
+            <!-- Card: Clientes Ativos -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px; border-left:4px solid #00838f;">
+                <div style="font-size:12px; color:var(--text-muted);">👥 Clientes Ativos</div>
+                <div style="font-size:28px; font-weight:700; color:#00838f;">354</div>
+                <div style="font-size:12px; color:var(--secondary);">↑ 12 novos este mês</div>
             </div>
         </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ===== DASHBOARD ANALÍTICO ===== -->
+    <!-- ========================================================== -->
+    <div style="margin-bottom:20px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="font-size:20px;">📈</span>
+            <h4 style="color:var(--primary); font-size:16px;">Dashboard Analítico</h4>
+            <span style="font-size:11px; color:var(--text-muted); background:var(--bg-light); padding:2px 10px; border-radius:12px;">Análise de Tendências</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:2fr 1fr; gap:16px;">
+
+            <!-- Gráfico: Número de Transações por Dia -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+                    <span style="font-weight:600; font-size:14px; color:var(--text-dark);">📊 Número de Transações por Dia</span>
+                    <span style="font-size:11px; color:var(--text-muted);">Última semana</span>
+                </div>
+                <div style="display:flex; align-items:flex-end; justify-content:space-around; height:120px; gap:4px;">
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; font-weight:600; color:var(--text-dark);">151</div>
+                        <div style="height:80px; background:var(--primary); border-radius:4px 4px 0 0; max-width:32px; margin:0 auto;"></div>
+                        <div style="font-size:10px; color:var(--text-muted);">Dom</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; font-weight:600; color:var(--text-dark);">158</div>
+                        <div style="height:85px; background:var(--primary); border-radius:4px 4px 0 0; max-width:32px; margin:0 auto;"></div>
+                        <div style="font-size:10px; color:var(--text-muted);">Seg</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; font-weight:600; color:var(--text-dark);">139</div>
+                        <div style="height:72px; background:var(--primary); border-radius:4px 4px 0 0; max-width:32px; margin:0 auto;"></div>
+                        <div style="font-size:10px; color:var(--text-muted);">Ter</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; font-weight:600; color:var(--text-dark);">151</div>
+                        <div style="height:80px; background:var(--secondary); border-radius:4px 4px 0 0; max-width:32px; margin:0 auto;"></div>
+                        <div style="font-size:10px; color:var(--text-muted);">Qua</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; font-weight:600; color:var(--text-dark);">137</div>
+                        <div style="height:70px; background:var(--secondary); border-radius:4px 4px 0 0; max-width:32px; margin:0 auto;"></div>
+                        <div style="font-size:10px; color:var(--text-muted);">Qui</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; font-weight:600; color:var(--text-dark);">145</div>
+                        <div style="height:75px; background:var(--accent); border-radius:4px 4px 0 0; max-width:32px; margin:0 auto;"></div>
+                        <div style="font-size:10px; color:var(--text-muted);">Sex</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; font-weight:600; color:var(--text-dark);">119</div>
+                        <div style="height:60px; background:var(--accent); border-radius:4px 4px 0 0; max-width:32px; margin:0 auto;"></div>
+                        <div style="font-size:10px; color:var(--text-muted);">Sáb</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico: % de Receitas por Cidade -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="font-weight:600; font-size:14px; color:var(--text-dark); margin-bottom:8px;">📍 % de Receitas por Cidade</div>
+                <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                    <div style="width:100px; height:100px; border-radius:50%; position:relative; background:conic-gradient(
+                        var(--primary) 0% 22%,
+                        var(--secondary) 22% 43%,
+                        var(--accent) 43% 64%,
+                        #6a1b9a 64% 82%,
+                        #00838f 82% 100%
+                    );">
+                        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:50px; height:50px; background:var(--bg-light); border-radius:50%;"></div>
+                    </div>
+                    <div style="font-size:12px; line-height:1.8;">
+                        <div><span style="display:inline-block; width:10px; height:10px; background:var(--primary); border-radius:50%;"></span> Belém 22%</div>
+                        <div><span style="display:inline-block; width:10px; height:10px; background:var(--secondary); border-radius:50%;"></span> Ananindeua 19%</div>
+                        <div><span style="display:inline-block; width:10px; height:10px; background:var(--accent); border-radius:50%;"></span> Marituba 21%</div>
+                        <div><span style="display:inline-block; width:10px; height:10px; background:#6a1b9a; border-radius:50%;"></span> Castanhal 19%</div>
+                        <div><span style="display:inline-block; width:10px; height:10px; background:#00838f; border-radius:50%;"></span> Barcarena 19%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico: Transações Mensais -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+                    <span style="font-weight:600; font-size:14px; color:var(--text-dark);">📊 Transações Mensais</span>
+                    <div style="display:flex; gap:4px;">
+                        <span style="font-size:10px; padding:2px 8px; border-radius:10px; background:var(--primary); color:#fff; cursor:pointer;">2021</span>
+                        <span style="font-size:10px; padding:2px 8px; border-radius:10px; background:var(--bg-white); color:var(--text-muted); cursor:pointer;">2022</span>
+                        <span style="font-size:10px; padding:2px 8px; border-radius:10px; background:var(--bg-white); color:var(--text-muted); cursor:pointer;">2023</span>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:flex-end; justify-content:space-between; height:80px; gap:2px;">
+                    <div style="text-align:center; flex:1;"><div style="height:30px; background:var(--primary); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Jan</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:25px; background:var(--primary); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Fev</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:40px; background:var(--primary); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Mar</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:55px; background:var(--secondary); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Abr</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:45px; background:var(--secondary); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Mai</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:35px; background:var(--secondary); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Jun</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:50px; background:var(--accent); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Jul</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:30px; background:var(--accent); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Ago</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:20px; background:var(--accent); border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Set</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:25px; background:#6a1b9a; border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Out</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:35px; background:#6a1b9a; border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Nov</div></div>
+                    <div style="text-align:center; flex:1;"><div style="height:45px; background:#6a1b9a; border-radius:2px; max-width:16px; margin:0 auto;"></div><div style="font-size:8px; color:var(--text-muted);">Dez</div></div>
+                </div>
+            </div>
+
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="font-weight:600; font-size:14px; color:var(--text-dark); margin-bottom:8px;">📈 Receitas e Lucros por Mês</div>
+                <div style="display:flex; align-items:flex-end; justify-content:space-between; height:80px; gap:2px;">
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:40px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:25px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Jan</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:30px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:18px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Fev</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:35px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:20px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Mar</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:45px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:30px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Abr</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:38px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:25px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Mai</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:32px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:18px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Jun</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:35px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:22px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Jul</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:28px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:15px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Ago</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:22px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:12px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Set</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:30px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:18px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Out</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:35px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:22px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Nov</div>
+                    </div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="height:42px; background:var(--primary); border-radius:2px 2px 0 0; max-width:10px; margin:0 auto;"></div>
+                        <div style="height:28px; background:var(--secondary); border-radius:2px 2px 0 0; max-width:10px; margin:2px auto 0;"></div>
+                        <div style="font-size:8px; color:var(--text-muted);">Dez</div>
+                    </div>
+                </div>
+                <div style="display:flex; gap:12px; justify-content:center; font-size:10px; margin-top:4px;">
+                    <span><span style="display:inline-block; width:10px; height:10px; background:var(--primary); border-radius:2px;"></span> Receitas</span>
+                    <span><span style="display:inline-block; width:10px; height:10px; background:var(--secondary); border-radius:2px;"></span> Lucros</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ===== DASHBOARD POR CATEGORIA (ANALÍTICO) ===== -->
+    <!-- ========================================================== -->
+    <div style="margin-bottom:20px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="font-size:20px;">📊</span>
+            <h4 style="color:var(--primary); font-size:16px;">Análise por Categoria</h4>
+            <span style="font-size:11px; color:var(--text-muted); background:var(--bg-light); padding:2px 10px; border-radius:12px;">Desempenho de Produtos</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+            <!-- Receitas por Categoria -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="font-weight:600; font-size:14px; color:var(--text-dark); margin-bottom:8px;">💰 Receitas por Categoria</div>
+                <div style="display:flex; flex-direction:column; gap:4px;">
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Suplementos</span><span style="display:inline-block; height:16px; background:var(--secondary); border-radius:10px; width:80%;"></span><span style="float:right; font-size:12px; font-weight:600;">5.150</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Analgésicos</span><span style="display:inline-block; height:16px; background:#e65100; border-radius:10px; width:75%;"></span><span style="float:right; font-size:12px; font-weight:600;">4.872</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Antisépticos</span><span style="display:inline-block; height:16px; background:#6a1b9a; border-radius:10px; width:72%;"></span><span style="float:right; font-size:12px; font-weight:600;">4.678</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Antiinflamatórios</span><span style="display:inline-block; height:16px; background:#00838f; border-radius:10px; width:71%;"></span><span style="float:right; font-size:12px; font-weight:600;">4.615</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Antibióticos</span><span style="display:inline-block; height:16px; background:#c62828; border-radius:10px; width:68%;"></span><span style="float:right; font-size:12px; font-weight:600;">4.435</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Vitaminas</span><span style="display:inline-block; height:16px; background:var(--primary); border-radius:10px; width:64%;"></span><span style="float:right; font-size:12px; font-weight:600;">4.143</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Cuidado Pessoal</span><span style="display:inline-block; height:16px; background:var(--accent); border-radius:10px; width:63%;"></span><span style="float:right; font-size:12px; font-weight:600;">4.082</span></div>
+                </div>
+            </div>
+
+            <!-- Transações por Categoria -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="font-weight:600; font-size:14px; color:var(--text-dark); margin-bottom:8px;">🔄 Transações por Categoria</div>
+                <div style="display:flex; flex-direction:column; gap:4px;">
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Suplementos</span><span style="display:inline-block; height:16px; background:var(--secondary); border-radius:10px; width:100%;"></span><span style="float:right; font-size:12px; font-weight:600;">468</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Analgésicos</span><span style="display:inline-block; height:16px; background:#e65100; border-radius:10px; width:98%;"></span><span style="float:right; font-size:12px; font-weight:600;">461</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Antisépticos</span><span style="display:inline-block; height:16px; background:#6a1b9a; border-radius:10px; width:91%;"></span><span style="float:right; font-size:12px; font-weight:600;">425</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Antiinflamatórios</span><span style="display:inline-block; height:16px; background:#00838f; border-radius:10px; width:89%;"></span><span style="float:right; font-size:12px; font-weight:600;">415</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Antibióticos</span><span style="display:inline-block; height:16px; background:#c62828; border-radius:10px; width:88%;"></span><span style="float:right; font-size:12px; font-weight:600;">411</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Vitaminas</span><span style="display:inline-block; height:16px; background:var(--primary); border-radius:10px; width:85%;"></span><span style="float:right; font-size:12px; font-weight:600;">400</span></div>
+                    <div><span style="display:inline-block; width:80px; font-size:12px; color:var(--text-muted);">Cuidado Pessoal</span><span style="display:inline-block; height:16px; background:var(--accent); border-radius:10px; width:85%;"></span><span style="float:right; font-size:12px; font-weight:600;">397</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ===== DASHBOARD OPERATIVO ===== -->
+    <!-- ========================================================== -->
+    <div style="margin-bottom:20px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="font-size:20px;">⚡</span>
+            <h4 style="color:var(--primary); font-size:16px;">Dashboard Operativo</h4>
+            <span style="font-size:11px; color:var(--text-muted); background:var(--bg-light); padding:2px 10px; border-radius:12px;">Monitoramento em Tempo Real</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:12px;">
+            <!-- Card: Vendas Hoje -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px 14px; text-align:center; border:1px solid #e8edf4;">
+                <div style="font-size:12px; color:var(--text-muted);">💰 Vendas Hoje</div>
+                <div style="font-size:22px; font-weight:700; color:var(--primary);">R$ 1.450</div>
+                <div style="font-size:11px; color:var(--secondary);">↑ 8% vs ontem</div>
+            </div>
+
+            <!-- Card: Estoque Crítico -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px 14px; text-align:center; border:1px solid #e8edf4;">
+                <div style="font-size:12px; color:var(--text-muted);">📦 Estoque Crítico</div>
+                <div style="font-size:22px; font-weight:700; color:#c62828;">3</div>
+                <div style="font-size:11px; color:var(--text-muted);">Produtos com baixo estoque</div>
+            </div>
+
+            <!-- Card: Vencimentos -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px 14px; text-align:center; border:1px solid #e8edf4;">
+                <div style="font-size:12px; color:var(--text-muted);">📅 Vencimentos</div>
+                <div style="font-size:22px; font-weight:700; color:#e65100;">8</div>
+                <div style="font-size:11px; color:var(--text-muted);">5 vencem em 7 dias</div>
+            </div>
+
+            <!-- Card: Caixas Ativos -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px 14px; text-align:center; border:1px solid #e8edf4;">
+                <div style="font-size:12px; color:var(--text-muted);">🖥️ Caixas Ativos</div>
+                <div style="font-size:22px; font-weight:700; color:var(--secondary);">3/4</div>
+                <div style="font-size:11px; color:var(--text-muted);">Online</div>
+            </div>
+
+            <!-- Card: Transferências -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px 14px; text-align:center; border:1px solid #e8edf4;">
+                <div style="font-size:12px; color:var(--text-muted);">🔄 Transferências</div>
+                <div style="font-size:22px; font-weight:700; color:#0d47a1;">2</div>
+                <div style="font-size:11px; color:var(--text-muted);">Aguardando aprovação</div>
+            </div>
+
+            <!-- Card: Clientes Hoje -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px 14px; text-align:center; border:1px solid #e8edf4;">
+                <div style="font-size:12px; color:var(--text-muted);">👥 Clientes Hoje</div>
+                <div style="font-size:22px; font-weight:700; color:#00838f;">42</div>
+                <div style="font-size:11px; color:var(--text-muted);">↑ 5 vs ontem</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ===== DASHBOARD INFORMATIVO ===== -->
+    <!-- ========================================================== -->
+    <div style="margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="font-size:20px;">📋</span>
+            <h4 style="color:var(--primary); font-size:16px;">Dashboard Informativo</h4>
+            <span style="font-size:11px; color:var(--text-muted); background:var(--bg-light); padding:2px 10px; border-radius:12px;">Resumo e Indicadores</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:2fr 1fr; gap:16px;">
+
+            <!-- Últimas Transações -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+                    <span style="font-weight:600; font-size:14px; color:var(--text-dark);">🕐 Últimas Transações</span>
+                    <span style="font-size:11px; color:var(--text-muted);">Atualizado há 2 min</span>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:12px; min-width:400px;">
+                        <thead>
+                            <tr style="border-bottom:2px solid #d5dde8;">
+                                <th style="text-align:left; padding:6px 4px; color:var(--text-muted); font-weight:600;">#</th>
+                                <th style="text-align:left; padding:6px 4px; color:var(--text-muted); font-weight:600;">Cliente</th>
+                                <th style="text-align:left; padding:6px 4px; color:var(--text-muted); font-weight:600;">Produto</th>
+                                <th style="text-align:right; padding:6px 4px; color:var(--text-muted); font-weight:600;">Valor</th>
+                                <th style="text-align:center; padding:6px 4px; color:var(--text-muted); font-weight:600;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid #e8edf4;">
+                                <td style="padding:6px 4px; font-weight:600;">#001</td>
+                                <td style="padding:6px 4px;">Ana Souza</td>
+                                <td style="padding:6px 4px;">Paracetamol 500mg</td>
+                                <td style="padding:6px 4px; text-align:right;">R$ 8,50</td>
+                                <td style="padding:6px 4px; text-align:center;"><span style="background:#e8f5e9; color:#2e7d32; padding:2px 8px; border-radius:10px; font-size:10px;">✅ Concluída</span></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid #e8edf4;">
+                                <td style="padding:6px 4px; font-weight:600;">#002</td>
+                                <td style="padding:6px 4px;">Carlos Lima</td>
+                                <td style="padding:6px 4px;">Aspirina 100mg</td>
+                                <td style="padding:6px 4px; text-align:right;">R$ 12,90</td>
+                                <td style="padding:6px 4px; text-align:center;"><span style="background:#e8f5e9; color:#2e7d32; padding:2px 8px; border-radius:10px; font-size:10px;">✅ Concluída</span></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid #e8edf4;">
+                                <td style="padding:6px 4px; font-weight:600;">#003</td>
+                                <td style="padding:6px 4px;">Mariana Costa</td>
+                                <td style="padding:6px 4px;">Ibuprofeno 600mg</td>
+                                <td style="padding:6px 4px; text-align:right;">R$ 31,50</td>
+                                <td style="padding:6px 4px; text-align:center;"><span style="background:#fff3e0; color:#e65100; padding:2px 8px; border-radius:10px; font-size:10px;">⏳ Pendente</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 4px; font-weight:600;">#004</td>
+                                <td style="padding:6px 4px;">João Pereira</td>
+                                <td style="padding:6px 4px;">Dipirona 1g</td>
+                                <td style="padding:6px 4px; text-align:right;">R$ 12,00</td>
+                                <td style="padding:6px 4px; text-align:center;"><span style="background:#e8f5e9; color:#2e7d32; padding:2px 8px; border-radius:10px; font-size:10px;">✅ Concluída</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Resumo Rápido -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:14px 16px;">
+                <div style="font-weight:600; font-size:14px; color:var(--text-dark); margin-bottom:8px;">📊 Resumo Rápido</div>
+                <div style="display:flex; flex-direction:column; gap:6px; font-size:13px;">
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #e8edf4;">
+                        <span style="color:var(--text-muted);">Vendas hoje</span>
+                        <span style="font-weight:600;">R$ 1.450</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #e8edf4;">
+                        <span style="color:var(--text-muted);">Vendas mês</span>
+                        <span style="font-weight:600;">R$ 8.230</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #e8edf4;">
+                        <span style="color:var(--text-muted);">Ticket médio</span>
+                        <span style="font-weight:600;">R$ 120,83</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #e8edf4;">
+                        <span style="color:var(--text-muted);">Clientes ativos</span>
+                        <span style="font-weight:600;">354</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #e8edf4;">
+                        <span style="color:var(--text-muted);">Estoque crítico</span>
+                        <span style="font-weight:600; color:#c62828;">3</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0;">
+                        <span style="color:var(--text-muted);">Vencimentos</span>
+                        <span style="font-weight:600; color:#e65100;">8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BOTÕES DE AÇÃO ===== -->
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; padding-top:16px; border-top:2px solid #e8edf4;">
+        <button class="btn-primary btn-sm" onclick="navegarPara('pdv')">🛒 Nova Venda</button>
+        <button class="btn-gold btn-sm" onclick="navegarPara('fidelidade')">⭐ Fidelidade</button>
+        <button class="btn-secondary btn-sm" onclick="navegarPara('estoque')">📦 Estoque</button>
+        <button class="btn-secondary btn-sm" onclick="navegarPara('vendas')">📈 Vendas</button>
+        <button class="btn-secondary btn-sm" onclick="navegarPara('relatorios')">📋 Relatórios</button>
+        <button class="btn-secondary btn-sm" onclick="navegarPara('suporte')">💬 Suporte</button>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- ===== CSS COMPLEMENTAR ===== -->
+<!-- ========================================================== -->
+
+<style>
+    .btn-gold {
+        background: #FFD700;
+        color: #333;
+        border: none;
+        font-weight: 700;
+        padding: 8px 20px;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 13px;
+    }
+
+    .btn-gold:hover {
+        background: #e6c200;
+        transform: translateY(-2px);
+    }
+
+    .dashboard-grid {
+        gap: 12px;
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+        .dash-card .value {
+            font-size: 22px !important;
+        }
+        .dash-card .label {
+            font-size: 11px !important;
+        }
+        .dash-analitico-grid {
+            grid-template-columns: 1fr !important;
+        }
+        .dash-categoria-grid {
+            grid-template-columns: 1fr !important;
+        }
+        .dash-informativo-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .dashboard-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+
+<!-- ========================================================== -->
+<!-- ===== JAVASCRIPT PARA NAVEGAÇÃO ===== -->
+<!-- ========================================================== -->
+
+<script>
+    function navegarPara(destino) {
+        var mapaDestinos = {
+            'pdv': 'client-pdv',
+            'estoque': 'client-estoque',
+            'fidelidade': 'client-fidelidade',
+            'insights': 'client-insights',
+            'alertas': 'client-alertas',
+            'multiloja': 'client-multiloja',
+            'caixas': 'client-caixas',
+            'vendas': 'client-vendas',
+            'suporte': 'client-suporte',
+            'configuracoes': 'client-configuracoes',
+            'relatorios': 'client-relatorios',
+            'dashboard': 'client-dashboard'
+        };
+
+        var targetId = mapaDestinos[destino] || 'client-dashboard';
+        var targetTab = document.getElementById(targetId);
+
+        if (!targetTab) {
+            var allTabs = document.querySelectorAll('.client-tab');
+            for (var i = 0; i < allTabs.length; i++) {
+                if (allTabs[i].id && allTabs[i].id.includes(destino)) {
+                    targetTab = allTabs[i];
+                    break;
+                }
+            }
+            if (!targetTab) {
+                alert('🔍 Função em desenvolvimento: ' + destino);
+                return;
+            }
+        }
+
+        var allTabs = document.querySelectorAll('.client-tab');
+        for (var i = 0; i < allTabs.length; i++) {
+            allTabs[i].style.display = 'none';
+        }
+        targetTab.style.display = 'block';
+
+        var navLinks = document.querySelectorAll('#clientNav a[data-client]');
+        for (var i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.remove('active-client');
+            if (navLinks[i].getAttribute('data-client') === destino) {
+                navLinks[i].classList.add('active-client');
+            }
+        }
+
+        var clienteTab = document.getElementById('cliente');
+        if (clienteTab && !clienteTab.classList.contains('active')) {
+            document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+            clienteTab.classList.add('active');
+            document.querySelectorAll('#mainNav a').forEach(function(l) { l.classList.remove('active'); });
+            var clientNavMain = document.querySelector('#mainNav a[data-tab="cliente"]');
+            if (clientNavMain) { clientNavMain.classList.add('active'); }
+        }
+
+        targetTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    window.navegarPara = navegarPara;
+</script>
 
         <!-- ===== PDV - MANTIDO ===== -->
         <div id="client-pdv" class="client-tab" style="display:none;">
