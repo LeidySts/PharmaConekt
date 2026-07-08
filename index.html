@@ -4831,44 +4831,981 @@ O <strong>PharmaConekt</strong> é o sistema de gestão que vai além do control
             </div>
         </div>
 
-        <!-- ===== ONEBOT - MANTIDO ===== -->
-        <div id="client-onebot" class="client-tab" style="display:none;">
-            <h3 style="color:var(--primary); margin-bottom:8px;">🤖 OneBot - Assistente de Saúde</h3>
-            <p style="color:var(--text-muted); margin-bottom:16px;">Chatbot inteligente para auxiliar clientes e farmacêuticos.</p>
+        <!-- ========================================================== -->
+<!-- ===== ONEBOT - ASSISTENTE DE SAÚDE ===== -->
+<!-- ========================================================== -->
 
-            <div class="card-grid">
-                <div class="card-stat">
-                    <div class="number">24</div>
-                    <div class="label">Atendimentos hoje</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:var(--secondary);">89%</div>
-                    <div class="label">Taxa de satisfação</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:#0d47a1;">12</div>
-                    <div class="label">Dúvidas respondidas</div>
-                </div>
-                <div class="card-stat">
-                    <div class="number" style="color:var(--accent);">8</div>
-                    <div class="label">Encaminhamentos</div>
+<div id="client-onebot" class="client-tab" style="display:none;">
+    <!-- ===== CABEÇALHO ===== -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div>
+            <h3 style="color:var(--primary);">🤖 OneBot - Assistente de Saúde</h3>
+            <p style="color:var(--text-muted); font-size:14px;">Seu assistente virtual inteligente para farmácia</p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-success btn-sm" onclick="abrirChatOneBot()">💬 Abrir Chat</button>
+            <button class="btn-secondary btn-sm" onclick="gerarRelatorioOneBot()">📊 Relatório</button>
+            <button class="btn-secondary btn-sm" onclick="configurarOneBot()">⚙️ Configurar</button>
+            <button class="btn-secondary btn-sm" onclick="verClientesAtendidos()">👥 Clientes</button>
+        </div>
+    </div>
+
+    <!-- ===== DASHBOARD DE MÉTRICAS ===== -->
+    <div class="card-grid" style="margin-bottom:16px;">
+        <div class="card-stat">
+            <div class="number" id="onebotAtendimentosHoje">24</div>
+            <div class="label">💬 Atendimentos hoje</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:var(--secondary);" id="onebotSatisfacao">89%</div>
+            <div class="label">😊 Taxa de satisfação</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:#0d47a1;" id="onebotDuvidasRespondidas">12</div>
+            <div class="label">📝 Dúvidas respondidas</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:var(--accent);" id="onebotEncaminhamentos">8</div>
+            <div class="label">🔄 Encaminhamentos</div>
+        </div>
+        <div class="card-stat">
+            <div class="number" style="color:#e65100;" id="onebotTempoMedio">2,5 min</div>
+            <div class="label">⏱️ Tempo médio de atendimento</div>
+        </div>
+        <div class="card-stat" style="background:#E3F2FD;">
+            <div class="number" style="color:#0d47a1;" id="onebotTotalAtendimentos">156</div>
+            <div class="label">📈 Total de atendimentos (mês)</div>
+        </div>
+        <!-- NOVO CARD: CLIENTES ATENDIDOS -->
+        <div class="card-stat" style="background:#FFF8E1;">
+            <div class="number" style="color:var(--gold);" id="onebotClientesAtendidosCount">89</div>
+            <div class="label">👥 Clientes Atendidos</div>
+            <span style="font-size:11px; color:var(--text-muted);">🔽 Clique para ver lista</span>
+        </div>
+    </div>
+
+    <!-- ===== ÁREA PRINCIPAL ===== -->
+    <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:16px;">
+
+        <!-- ===== COLUNA ESQUERDA: PERGUNTAS RÁPIDAS E SERVIÇOS ===== -->
+        <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <!-- Perguntas Rápidas -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:16px;">
+                <h4 style="color:var(--primary); font-size:15px; margin-bottom:8px;">⚡ Perguntas Rápidas</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Como tomar este medicamento?')">💊 Como tomar?</button>
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Quais os efeitos colaterais?')">⚠️ Efeitos colaterais</button>
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Tem interação com outros medicamentos?')">🔄 Interações</button>
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Qual o preço deste medicamento?')">💰 Preço</button>
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Tem desconto para farmácia popular?')">🏥 Farmácia Popular</button>
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Preciso de receita médica?')">📋 Receita</button>
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Qual a validade?')">📅 Validade</button>
+                    <button class="btn-secondary btn-sm" onclick="perguntaRapida('Como armazenar este medicamento?')">🏠 Armazenamento</button>
                 </div>
             </div>
 
-            <div style="background:var(--bg-light); border-radius:var(--radius); padding:16px; margin:12px 0;">
-                <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-                    <div style="font-size:48px;">🤖</div>
-                    <div>
-                        <h4 style="color:var(--primary);">OneBot está online!</h4>
-                        <p style="font-size:14px; color:var(--text-muted);">
-                            O assistente virtual está pronto para ajudar seus clientes.
-                        </p>
+            <!-- Serviços Disponíveis -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:16px;">
+                <h4 style="color:var(--primary); font-size:15px; margin-bottom:8px;">🛎️ Serviços Disponíveis</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                    <button class="btn-primary btn-sm" onclick="servicoOneBot('Agendar Farmácia Popular')">🏥 Farmácia Popular</button>
+                    <button class="btn-gold btn-sm" onclick="servicoOneBot('Verificar Medicamentos')">💊 Verificar Medicamentos</button>
+                    <button class="btn-success btn-sm" onclick="servicoOneBot('Agendar Retirada')">📦 Agendar Retirada</button>
+                    <button class="btn-secondary btn-sm" onclick="servicoOneBot('Agendar Consulta')">👨‍⚕️ Agendar Consulta</button>
+                    <button class="btn-secondary btn-sm" onclick="servicoOneBot('Falar com Farmacêutico')">💬 Falar com Farmacêutico</button>
+                    <button class="btn-secondary btn-sm" onclick="servicoOneBot('Programar Lembrete')">🔔 Programar Lembrete</button>
+                </div>
+            </div>
+
+            <!-- Lembretes -->
+            <div style="background:var(--bg-light); border-radius:var(--radius); padding:16px;">
+                <h4 style="color:var(--primary); font-size:15px; margin-bottom:8px;">🔔 Lembretes Ativos</h4>
+                <div id="onebotLembretesContainer">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #e8edf4; font-size:13px;">
+                        <span>💊 Tomar Paracetamol</span>
+                        <span style="color:var(--text-muted); font-size:11px;">10:00</span>
+                        <button class="btn-danger btn-sm" style="padding:2px 8px; font-size:10px;" onclick="removerLembrete(this)">✕</button>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #e8edf4; font-size:13px;">
+                        <span>💊 Tomar Dipirona</span>
+                        <span style="color:var(--text-muted); font-size:11px;">14:00</span>
+                        <button class="btn-danger btn-sm" style="padding:2px 8px; font-size:10px;" onclick="removerLembrete(this)">✕</button>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; font-size:13px;">
+                        <span>💊 Tomar Amoxicilina</span>
+                        <span style="color:var(--text-muted); font-size:11px;">20:00</span>
+                        <button class="btn-danger btn-sm" style="padding:2px 8px; font-size:10px;" onclick="removerLembrete(this)">✕</button>
                     </div>
                 </div>
-                <button class="btn-primary btn-sm" onclick="alert('💬 Abrindo chat do OneBot...')">💬 Abrir Chat</button>
+                <button class="btn-primary btn-sm" style="width:100%; margin-top:8px;" onclick="adicionarLembrete()">➕ Adicionar Lembrete</button>
             </div>
         </div>
-    </section>
+
+        <!-- ===== COLUNA DIREITA: CHAT ===== -->
+        <div style="background:var(--bg-light); border-radius:var(--radius); padding:16px; display:flex; flex-direction:column; height:500px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <div>
+                    <span style="font-size:18px;">🤖</span>
+                    <span style="font-weight:600; margin-left:8px;">OneBot</span>
+                    <span style="font-size:12px; color:var(--text-muted); margin-left:8px;">🟢 Online</span>
+                </div>
+                <div>
+                    <span style="font-size:12px; color:var(--text-muted);" id="onebotHorario">Última atividade: agora</span>
+                    <span style="font-size:12px; color:var(--text-muted); margin-left:12px;">👥 <span id="onebotClientesOnline">3</span> online</span>
+                </div>
+            </div>
+
+            <!-- Mensagens do Chat -->
+            <div id="onebotChatMessages" style="flex:1; overflow-y:auto; background:var(--bg-white); border-radius:var(--radius); padding:12px; margin-bottom:10px; max-height:350px; min-height:250px;">
+                <div style="display:flex; gap:8px; margin-bottom:10px;">
+                    <div style="background:var(--primary); color:#fff; padding:8px 12px; border-radius:12px 12px 12px 4px; max-width:80%; font-size:13px;">
+                        Olá! Eu sou o <strong>OneBot</strong>, seu assistente virtual de saúde. Como posso ajudar você hoje?
+                    </div>
+                </div>
+                <div style="display:flex; gap:8px; margin-bottom:10px; justify-content:flex-start;">
+                    <div style="background:#e8edf4; color:var(--text-dark); padding:8px 12px; border-radius:12px 12px 4px 12px; max-width:80%; font-size:13px;">
+                        💡 Você pode me perguntar sobre medicamentos, saúde, farmácia popular e muito mais!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo de entrada -->
+            <div style="display:flex; gap:8px; align-items:center; background:var(--bg-white); border-radius:30px; padding:4px; border:2px solid #d5dde8;">
+                <input type="text" id="onebotChatInput" placeholder="Digite sua pergunta aqui..." style="flex:1; padding:10px 16px; border:none; border-radius:30px; font-size:14px; background:transparent; outline:none;">
+                <button class="btn-primary btn-sm" id="onebotSendBtn" style="border-radius:30px; padding:8px 20px;">Enviar</button>
+            </div>
+
+            <!-- Sugestões rápidas -->
+            <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:8px;">
+                <span style="font-size:11px; color:var(--text-muted);">Sugestões:</span>
+                <span class="suggestion-chat" onclick="perguntaRapida('Quais medicamentos para dor de cabeça?')" style="font-size:11px; color:var(--primary); cursor:pointer; background:#e3f2fd; padding:2px 10px; border-radius:12px;">💊 Dor de cabeça</span>
+                <span class="suggestion-chat" onclick="perguntaRapida('Qual o preço do Paracetamol?')" style="font-size:11px; color:var(--primary); cursor:pointer; background:#e3f2fd; padding:2px 10px; border-radius:12px;">💰 Preço</span>
+                <span class="suggestion-chat" onclick="perguntaRapida('Farmácia Popular funciona aqui?')" style="font-size:11px; color:var(--primary); cursor:pointer; background:#e3f2fd; padding:2px 10px; border-radius:12px;">🏥 Farmácia Popular</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ÁREA DE ESTATÍSTICAS ADICIONAIS ===== -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin-top:16px;">
+        <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px; text-align:center;">
+            <span style="font-size:24px;">📝</span>
+            <div style="font-size:20px; font-weight:700; color:var(--primary);" id="onebotPerguntasComuns">5</div>
+            <div style="font-size:12px; color:var(--text-muted);">Perguntas mais comuns</div>
+        </div>
+        <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px; text-align:center;">
+            <span style="font-size:24px;">👥</span>
+            <div style="font-size:20px; font-weight:700; color:var(--secondary);" id="onebotClientesAtendidosDisplay">89</div>
+            <div style="font-size:12px; color:var(--text-muted);">Clientes atendidos</div>
+        </div>
+        <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px; text-align:center;">
+            <span style="font-size:24px;">⭐</span>
+            <div style="font-size:20px; font-weight:700; color:var(--gold);" id="onebotAvaliacaoMedia">4.8</div>
+            <div style="font-size:12px; color:var(--text-muted);">Avaliação média (5 estrelas)</div>
+        </div>
+        <div style="background:var(--bg-light); border-radius:var(--radius); padding:12px; text-align:center;">
+            <span style="font-size:24px;">🔄</span>
+            <div style="font-size:20px; font-weight:700; color:#0d47a1;" id="onebotTaxaResolucao">92%</div>
+            <div style="font-size:12px; color:var(--text-muted);">Taxa de resolução</div>
+        </div>
+    </div>
+
+    <!-- ===== SEÇÃO: CLIENTES ATENDIDOS (NOVA) ===== -->
+    <div style="margin-top:20px; background:var(--bg-light); border-radius:var(--radius); padding:16px; border:2px solid var(--gold);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+            <div>
+                <h4 style="color:var(--primary);">👥 Últimos Clientes Atendidos</h4>
+                <p style="font-size:13px; color:var(--text-muted);">Histórico dos clientes que interagiram com o OneBot</p>
+            </div>
+            <button class="btn-primary btn-sm" onclick="verClientesAtendidos()">📋 Ver Todos</button>
+        </div>
+        <div class="table-wrapper" style="margin:0;">
+            <table id="onebotClientesTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Cliente</th>
+                        <th>Telefone</th>
+                        <th>Data/Hora</th>
+                        <th>Tempo</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="onebotClientesTableBody">
+                    <!-- Preenchido via JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- ===== MODAL CLIENTES ATENDIDOS ===== -->
+<!-- ========================================================== -->
+
+<div class="modal-overlay" id="clientesAtendidosModal">
+    <div class="modal-cadastro" style="max-width:700px;">
+        <button class="close-modal" id="closeClientesAtendidosModal">&times;</button>
+        <h3>👥 Clientes Atendidos - OneBot</h3>
+        <div class="subtitle" style="color:var(--text-muted); font-size:14px; margin-bottom:12px;">
+            Lista completa de clientes que interagiram com o assistente virtual
+        </div>
+
+        <!-- Filtros -->
+        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:16px; align-items:center;">
+            <input type="text" id="filtroClienteOneBot" placeholder="🔍 Buscar cliente..." style="flex:1; padding:6px 12px; border:2px solid #d5dde8; border-radius:8px; font-size:13px; min-width:150px;">
+            <button class="btn-primary btn-sm" onclick="filtrarClientesOneBot()">🔍 Filtrar</button>
+            <button class="btn-secondary btn-sm" onclick="limparFiltroClientesOneBot()">🗑️ Limpar</button>
+            <span style="font-size:12px; color:var(--text-muted);" id="totalClientesOneBot">Total: 0 clientes</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Cliente</th>
+                        <th>Telefone</th>
+                        <th>Data/Hora</th>
+                        <th>Tempo</th>
+                        <th>Assunto</th>
+                        <th>Status</th>
+                        <th>Atendente</th>
+                    </tr>
+                </thead>
+                <tbody id="clientesAtendidosTableBody">
+                    <!-- Preenchido via JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:12px;">
+            <span style="font-size:13px; color:var(--text-muted);" id="clientesPaginacaoInfo">Mostrando 1-10 de 0 clientes</span>
+            <div style="display:flex; gap:4px;">
+                <button class="btn-secondary btn-sm" onclick="clientesPaginaAnterior()">◀ Anterior</button>
+                <span style="padding:4px 12px; background:var(--bg-light); border-radius:4px; font-size:13px;" id="clientesPaginaAtual">1</span>
+                <button class="btn-secondary btn-sm" onclick="clientesProximaPagina()">Próxima ▶</button>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;">
+            <button class="btn-secondary btn-sm" onclick="exportarClientesCSV()">📄 Exportar CSV</button>
+            <button class="btn-secondary btn-sm" onclick="imprimirClientes()">🖨️ Imprimir</button>
+            <button class="btn-danger btn-sm" onclick="fecharModalClientes()">✖️ Fechar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- ===== MODAL CONFIGURAÇÃO ONEBOT ===== -->
+<!-- ========================================================== -->
+
+<div class="modal-overlay" id="configOneBotModal">
+    <div class="modal-cadastro" style="max-width:500px;">
+        <button class="close-modal" id="closeConfigOneBotModal">&times;</button>
+        <h3>⚙️ Configuração do OneBot</h3>
+        <div class="subtitle" style="color:var(--text-muted); font-size:14px; margin-bottom:12px;">Personalize o assistente virtual</div>
+
+        <div class="form-group">
+            <label>Nome do Assistente</label>
+            <input type="text" id="configOneBotNome" value="OneBot" placeholder="Nome do assistente">
+        </div>
+        <div class="form-group">
+            <label>Tempo de Resposta (segundos)</label>
+            <input type="number" id="configOneBotTempo" value="2" min="1" max="10">
+        </div>
+        <div class="form-group">
+            <label>Idioma</label>
+            <select id="configOneBotIdioma">
+                <option value="pt">🇧🇷 Português</option>
+                <option value="en">🇺🇸 Inglês</option>
+                <option value="es">🇪🇸 Espanhol</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Tema do Chat</label>
+            <select id="configOneBotTema">
+                <option value="claro">☀️ Claro</option>
+                <option value="escuro">🌙 Escuro</option>
+                <option value="azul">🔵 Azul</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Saudação Personalizada</label>
+            <input type="text" id="configOneBotSaudacao" value="Olá! Eu sou o OneBot, seu assistente de saúde. Como posso ajudar você hoje?" placeholder="Mensagem de saudação">
+        </div>
+
+        <button class="btn-cadastro-confirm" id="configOneBotSalvar" style="width:100%; padding:12px; border:none; border-radius:30px; background:var(--secondary); color:#fff; font-weight:700; font-size:16px; cursor:pointer; transition:var(--transition);">💾 Salvar Configurações</button>
+        <button class="btn-cadastro-cancel" id="configOneBotCancelar" style="width:100%; padding:10px; border:2px solid #d5dde8; border-radius:30px; background:transparent; color:var(--text-dark); font-weight:600; cursor:pointer; transition:var(--transition); margin-top:8px;">✖️ Cancelar</button>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- ===== CSS COMPLEMENTAR ===== -->
+<!-- ========================================================== -->
+
+<style>
+    .suggestion-chat:hover {
+        background: var(--primary) !important;
+        color: #fff !important;
+        transform: scale(1.05);
+    }
+
+    #onebotChatMessages::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #onebotChatMessages::-webkit-scrollbar-track {
+        background: #f0f4f9;
+        border-radius: 10px;
+    }
+
+    #onebotChatMessages::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 10px;
+    }
+
+    .btn-gold {
+        background: #FFD700;
+        color: #333;
+        border: none;
+        font-weight: 700;
+        padding: 6px 16px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 12px;
+    }
+
+    .btn-gold:hover {
+        background: #e6c200;
+        transform: translateY(-2px);
+    }
+
+    .card-stat.clickable {
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .card-stat.clickable:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+    }
+</style>
+
+<!-- ========================================================== -->
+<!-- ===== JAVASCRIPT COMPLETO ===== -->
+<!-- ========================================================== -->
+
+<script>
+    // ================================================================
+    // ===== VARIÁVEIS GLOBAIS =====
+    // ================================================================
+
+    var oneBotChatHistory = [];
+    var oneBotAtendimentosHoje = 24;
+    var oneBotSatisfacao = 89;
+    var oneBotDuvidasRespondidas = 12;
+    var oneBotEncaminhamentos = 8;
+    var oneBotTempoMedio = 2.5;
+    var oneBotTotalAtendimentos = 156;
+    var oneBotPerguntasComuns = 5;
+    var oneBotClientesAtendidos = 89;
+    var oneBotAvaliacaoMedia = 4.8;
+    var oneBotTaxaResolucao = 92;
+
+    var clientesAtendidosData = [];
+    var clientesPageAtual = 1;
+    var clientesItensPorPagina = 10;
+    var clientesIdCounter = 1;
+
+    // ================================================================
+    // ===== DADOS DE RESPOSTAS =====
+    // ================================================================
+
+    var respostasOneBot = {
+        'como tomar': '💊 <strong>Orientação de uso:</strong><br><br>• Siga a orientação do seu médico ou farmacêutico.<br>• Leia a bula antes de usar.<br>• Respeite os horários e doses indicados.<br>• Não interrompa o tratamento sem orientação médica.<br>• Em caso de dúvidas, consulte o farmacêutico.',
+
+        'efeitos colaterais': '⚠️ <strong>Efeitos colaterais:</strong><br><br>• Podem ocorrer reações como náuseas, tontura ou sonolência.<br>• Em caso de reações graves, procure ajuda médica imediatamente.<br>• Consulte a bula para informações detalhadas.<br>• Informe seu médico sobre qualquer reação adversa.',
+
+        'interação': '🔄 <strong>Interação medicamentosa:</strong><br><br>• Informe seu médico sobre todos os medicamentos que você usa.<br>• Alguns medicamentos podem interagir entre si.<br>• Não misture medicamentos sem orientação médica.<br>• Consulte o farmacêutico para orientações seguras.',
+
+        'preço': '💰 <strong>Informação de preço:</strong><br><br>• Os preços podem variar conforme a farmácia e região.<br>• Consulte o balcão para valores atualizados.<br>• Aceitamos Farmácia Popular e convênios.<br>• Oferecemos descontos em compras com fidelidade.',
+
+        'farmácia popular': '🏥 <strong>Farmácia Popular:</strong><br><br>• A Farmácia Popular oferece medicamentos com desconto.<br>• Apresente o CPF do titular para participar.<br>• Confira a lista de medicamentos disponíveis.<br>• Atendimento disponível em nossa farmácia.',
+
+        'receita': '📋 <strong>Receita médica:</strong><br><br>• Alguns medicamentos exigem receita médica para compra.<br>• Medicamentos controlados necessitam de retenção de receita.<br>• Consulte nosso farmacêutico para mais informações.<br>• Mantenha suas receitas em dia.',
+
+        'validade': '📅 <strong>Validade do medicamento:</strong><br><br>• Verifique a data de validade na embalagem.<br>• Não utilize medicamentos vencidos.<br>• Descarte corretamente medicamentos vencidos.<br>• Consulte o farmacêutico para orientações sobre descarte.',
+
+        'armazenamento': '🏠 <strong>Armazenamento correto:</strong><br><br>• Mantenha os medicamentos em local fresco e seco.<br>• Evite exposição à luz solar direta.<br>• Mantenha fora do alcance de crianças.<br>• Respeite as condições de armazenamento indicadas na bula.',
+
+        'dor de cabeça': '💊 <strong>Medicamentos para dor de cabeça:</strong><br><br>• Paracetamol 500mg - R$ 8,50<br>• Dipirona 1g - R$ 12,90<br>• Ibuprofeno 600mg - R$ 15,50<br>• Aspirina 100mg - R$ 12,90<br><br>🔍 Recomendação: Consulte um médico para o diagnóstico correto.',
+
+        'padrão': '🤖 <strong>OneBot - Assistente de Saúde:</strong><br><br>• Entendi sua pergunta! 😊<br>• Meu sistema ainda está aprendendo sobre este assunto.<br>• Posso encaminhá-lo para um farmacêutico.<br>• Ou você pode reformular sua pergunta.<br><br>💡 Dica: Seja mais específico para que eu possa ajudar melhor!'
+    };
+
+    // ================================================================
+    // ===== DADOS MOCKADOS DE CLIENTES =====
+    // ================================================================
+
+    function carregarClientesMock() {
+        var nomes = ['Ana Souza', 'Carlos Lima', 'Mariana Costa', 'João Pereira', 'Fernanda Santos',
+            'Rafael Oliveira', 'Patrícia Silva', 'Lucas Mendes', 'Juliana Ferreira', 'Marcos Vinicius',
+            'Beatriz Santos', 'André Almeida', 'Camila Rocha', 'Diego Nascimento', 'Eduarda Araújo',
+            'Felipe Cardoso', 'Gabriela Lima', 'Henrique Barros', 'Isabela Castro', 'Jorge Menezes'
+        ];
+
+        var telefones = ['(91) 99999-0001', '(91) 99999-0002', '(91) 99999-0003', '(91) 99999-0004', '(91) 99999-0005',
+            '(91) 99999-0006', '(91) 99999-0007', '(91) 99999-0008', '(91) 99999-0009', '(91) 99999-0010',
+            '(91) 99999-0011', '(91) 99999-0012', '(91) 99999-0013', '(91) 99999-0014', '(91) 99999-0015',
+            '(91) 99999-0016', '(91) 99999-0017', '(91) 99999-0018', '(91) 99999-0019', '(91) 99999-0020'
+        ];
+
+        var assuntos = ['Dúvida sobre medicamento', 'Farmácia Popular', 'Agendamento', 'Consulta', 'Preço',
+            'Efeitos colaterais', 'Interação medicamentosa', 'Receita médica', 'Validade', 'Armazenamento'
+        ];
+
+        var statuses = ['✅ Finalizado', '⏳ Em andamento', '🔄 Encaminhado', '📋 Agendado'];
+
+        var now = new Date();
+
+        for (var i = 0; i < 89; i++) {
+            var nome = nomes[i % nomes.length];
+            var data = new Date(now);
+            data.setHours(data.getHours() - Math.floor(Math.random() * 48));
+            data.setMinutes(Math.floor(Math.random() * 60));
+
+            var tempo = (Math.random() * 5 + 1).toFixed(1);
+
+            clientesAtendidosData.push({
+                id: clientesIdCounter++,
+                cliente: nome,
+                telefone: telefones[i % telefones.length],
+                data: data.toLocaleDateString('pt-BR'),
+                hora: data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                dataTimestamp: data.getTime(),
+                tempo: tempo + ' min',
+                assunto: assuntos[Math.floor(Math.random() * assuntos.length)],
+                status: statuses[Math.floor(Math.random() * statuses.length)],
+                atendente: ['João Silva', 'Maria Oliveira', 'Carlos Pereira', 'Ana Souza'][Math.floor(Math.random() * 4)]
+            });
+        }
+
+        // Ordena por data (mais recente primeiro)
+        clientesAtendidosData.sort(function(a, b) {
+            return b.dataTimestamp - a.dataTimestamp;
+        });
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DE INICIALIZAÇÃO =====
+    // ================================================================
+
+    function initOneBot() {
+        if (clientesAtendidosData.length === 0) {
+            carregarClientesMock();
+        }
+        atualizarMetricasOneBot();
+        renderizarClientesAtendidos();
+        document.getElementById('onebotHorario').textContent = 'Última atividade: ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function atualizarMetricasOneBot() {
+        document.getElementById('onebotAtendimentosHoje').textContent = oneBotAtendimentosHoje;
+        document.getElementById('onebotSatisfacao').textContent = oneBotSatisfacao + '%';
+        document.getElementById('onebotDuvidasRespondidas').textContent = oneBotDuvidasRespondidas;
+        document.getElementById('onebotEncaminhamentos').textContent = oneBotEncaminhamentos;
+        document.getElementById('onebotTempoMedio').textContent = oneBotTempoMedio.toFixed(1) + ' min';
+        document.getElementById('onebotTotalAtendimentos').textContent = oneBotTotalAtendimentos;
+        document.getElementById('onebotPerguntasComuns').textContent = oneBotPerguntasComuns;
+        document.getElementById('onebotClientesAtendidosDisplay').textContent = oneBotClientesAtendidos;
+        document.getElementById('onebotClientesAtendidosCount').textContent = oneBotClientesAtendidos;
+        document.getElementById('onebotAvaliacaoMedia').textContent = oneBotAvaliacaoMedia.toFixed(1);
+        document.getElementById('onebotTaxaResolucao').textContent = oneBotTaxaResolucao + '%';
+        document.getElementById('onebotClientesOnline').textContent = Math.floor(Math.random() * 8) + 1;
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DE CLIENTES ATENDIDOS =====
+    // ================================================================
+
+    function renderizarClientesAtendidos() {
+        var tbody = document.getElementById('onebotClientesTableBody');
+        if (!tbody) return;
+
+        var dados = clientesAtendidosData.slice(0, 10);
+        if (dados.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align:center; color:var(--text-muted); padding:20px;">
+                        <div style="font-size:24px; margin-bottom:8px;">👥</div>
+                        Nenhum cliente atendido ainda
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        var html = '';
+        dados.forEach(function(c, index) {
+            var statusColor = c.status.includes('Finalizado') ? '#e8f5e9' : c.status.includes('Andamento') ? '#e3f2fd' : c.status.includes('Encaminhado') ? '#fff3e0' : '#e8f5e9';
+            var statusTextColor = c.status.includes('Finalizado') ? '#2e7d32' : c.status.includes('Andamento') ? '#0d47a1' : c.status.includes('Encaminhado') ? '#e65100' : '#2e7d32';
+            html += `
+                <tr>
+                    <td>${c.id}</td>
+                    <td><strong>${c.cliente}</strong></td>
+                    <td>${c.telefone}</td>
+                    <td>${c.data} ${c.hora}</td>
+                    <td>${c.tempo}</td>
+                    <td><span style="background:${statusColor}; color:${statusTextColor}; padding:2px 8px; border-radius:10px; font-size:11px;">${c.status}</span></td>
+                    <td>
+                        <button class="btn-secondary btn-sm" onclick="verDetalhesClienteOneBot(${c.id})">📋</button>
+                    </td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = html;
+    }
+
+    function verClientesAtendidos() {
+        var modal = document.getElementById('clientesAtendidosModal');
+        if (!modal) return;
+
+        modal.classList.add('active');
+        clientesPageAtual = 1;
+        renderizarClientesAtendidosModal();
+        document.getElementById('totalClientesOneBot').textContent = 'Total: ' + clientesAtendidosData.length + ' clientes';
+    }
+
+    function renderizarClientesAtendidosModal() {
+        var tbody = document.getElementById('clientesAtendidosTableBody');
+        if (!tbody) return;
+
+        var filtro = document.getElementById('filtroClienteOneBot') ? document.getElementById('filtroClienteOneBot').value.toLowerCase().trim() : '';
+
+        var dadosFiltrados = clientesAtendidosData.filter(function(c) {
+            return c.cliente.toLowerCase().includes(filtro) || c.telefone.includes(filtro) || c.assunto.toLowerCase().includes(filtro);
+        });
+
+        var total = dadosFiltrados.length;
+        var totalPaginas = Math.ceil(total / clientesItensPorPagina);
+        if (clientesPageAtual > totalPaginas) clientesPageAtual = 1;
+        if (clientesPageAtual < 1) clientesPageAtual = 1;
+
+        var inicio = (clientesPageAtual - 1) * clientesItensPorPagina;
+        var fim = Math.min(inicio + clientesItensPorPagina, total);
+        var paginaDados = dadosFiltrados.slice(inicio, fim);
+
+        if (paginaDados.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="8" style="text-align:center; color:var(--text-muted); padding:30px;">
+                        <div style="font-size:32px; margin-bottom:8px;">👥</div>
+                        Nenhum cliente encontrado
+                    </td>
+                </tr>
+            `;
+        } else {
+            var html = '';
+            paginaDados.forEach(function(c) {
+                var statusColor = c.status.includes('Finalizado') ? '#e8f5e9' : c.status.includes('Andamento') ? '#e3f2fd' : c.status.includes('Encaminhado') ? '#fff3e0' : '#e8f5e9';
+                var statusTextColor = c.status.includes('Finalizado') ? '#2e7d32' : c.status.includes('Andamento') ? '#0d47a1' : c.status.includes('Encaminhado') ? '#e65100' : '#2e7d32';
+                html += `
+                    <tr>
+                        <td>${c.id}</td>
+                        <td><strong>${c.cliente}</strong></td>
+                        <td>${c.telefone}</td>
+                        <td>${c.data} ${c.hora}</td>
+                        <td>${c.tempo}</td>
+                        <td>${c.assunto}</td>
+                        <td><span style="background:${statusColor}; color:${statusTextColor}; padding:2px 8px; border-radius:10px; font-size:11px;">${c.status}</span></td>
+                        <td>${c.atendente}</td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        document.getElementById('clientesPaginacaoInfo').textContent =
+            'Mostrando ' + (total > 0 ? inicio + 1 : 0) + '-' + fim + ' de ' + total + ' clientes';
+        document.getElementById('clientesPaginaAtual').textContent = clientesPageAtual;
+        document.getElementById('totalClientesOneBot').textContent = 'Total: ' + total + ' clientes';
+    }
+
+    function filtrarClientesOneBot() {
+        clientesPageAtual = 1;
+        renderizarClientesAtendidosModal();
+    }
+
+    function limparFiltroClientesOneBot() {
+        document.getElementById('filtroClienteOneBot').value = '';
+        clientesPageAtual = 1;
+        renderizarClientesAtendidosModal();
+    }
+
+    function clientesPaginaAnterior() {
+        if (clientesPageAtual > 1) {
+            clientesPageAtual--;
+            renderizarClientesAtendidosModal();
+        }
+    }
+
+    function clientesProximaPagina() {
+        var total = clientesAtendidosData.length;
+        var totalPaginas = Math.ceil(total / clientesItensPorPagina);
+        if (clientesPageAtual < totalPaginas) {
+            clientesPageAtual++;
+            renderizarClientesAtendidosModal();
+        }
+    }
+
+    function verDetalhesClienteOneBot(id) {
+        var cliente = clientesAtendidosData.find(function(c) { return c.id === id; });
+        if (!cliente) return;
+
+        alert('📋 DETALHES DO CLIENTE\n' +
+              '================================\n\n' +
+              '👤 Cliente: ' + cliente.cliente + '\n' +
+              '📞 Telefone: ' + cliente.telefone + '\n' +
+              '📅 Data: ' + cliente.data + ' ' + cliente.hora + '\n' +
+              '⏱️ Tempo: ' + cliente.tempo + '\n' +
+              '📝 Assunto: ' + cliente.assunto + '\n' +
+              '📊 Status: ' + cliente.status + '\n' +
+              '👨‍💼 Atendente: ' + cliente.atendente + '\n\n' +
+              '💬 Histórico de conversas:\n' +
+              '   • ' + cliente.assunto + ' - ' + cliente.data);
+    }
+
+    function exportarClientesCSV() {
+        if (clientesAtendidosData.length === 0) {
+            alert('⚠️ Nenhum cliente para exportar.');
+            return;
+        }
+
+        var csv = 'ID,Cliente,Telefone,Data,Hora,Tempo,Assunto,Status,Atendente\n';
+        clientesAtendidosData.forEach(function(c) {
+            csv += c.id + ',' +
+                   c.cliente + ',' +
+                   c.telefone + ',' +
+                   c.data + ',' +
+                   c.hora + ',' +
+                   c.tempo + ',' +
+                   c.assunto + ',' +
+                   c.status + ',' +
+                   c.atendente + '\n';
+        });
+
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'clientes_atendidos_onebot_' + new Date().toISOString().split('T')[0] + '.csv';
+        link.click();
+        URL.revokeObjectURL(link.href);
+    }
+
+    function imprimirClientes() {
+        alert('🖨️ Imprimindo lista de clientes atendidos...');
+    }
+
+    function fecharModalClientes() {
+        document.getElementById('clientesAtendidosModal').classList.remove('active');
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DO CHAT =====
+    // ================================================================
+
+    function abrirChatOneBot() {
+        var container = document.getElementById('onebotChatMessages');
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
+        document.getElementById('onebotChatInput').focus();
+    }
+
+    function enviarMensagemOneBot() {
+        var input = document.getElementById('onebotChatInput');
+        var message = input.value.trim();
+        if (!message) return;
+
+        // Adiciona mensagem do usuário
+        adicionarMensagemUsuario(message);
+        input.value = '';
+
+        // Processa resposta
+        processarPerguntaOneBot(message);
+
+        // Atualiza estatísticas
+        oneBotAtendimentosHoje++;
+        oneBotTotalAtendimentos++;
+        atualizarMetricasOneBot();
+    }
+
+    function adicionarMensagemUsuario(texto) {
+        var container = document.getElementById('onebotChatMessages');
+        if (!container) return;
+
+        var div = document.createElement('div');
+        div.style.cssText = 'display:flex; gap:8px; margin-bottom:10px; justify-content:flex-end;';
+        div.innerHTML = `
+            <div style="background:var(--primary); color:#fff; padding:8px 12px; border-radius:12px 12px 4px 12px; max-width:80%; font-size:13px;">
+                ${texto}
+            </div>
+        `;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+
+        // Registra cliente atendido
+        registrarClienteAtendido(texto);
+    }
+
+    function adicionarMensagemOneBot(texto) {
+        var container = document.getElementById('onebotChatMessages');
+        if (!container) return;
+
+        var div = document.createElement('div');
+        div.style.cssText = 'display:flex; gap:8px; margin-bottom:10px; justify-content:flex-start;';
+        div.innerHTML = `
+            <div style="background:#e8edf4; color:var(--text-dark); padding:8px 12px; border-radius:12px 12px 12px 4px; max-width:80%; font-size:13px; line-height:1.6;">
+                ${texto}
+            </div>
+        `;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function registrarClienteAtendido(pergunta) {
+        var now = new Date();
+        var nomeCliente = document.getElementById('onebotChatInput').value.trim() || 'Cliente Anônimo';
+
+        // Verifica se já existe um cliente com este nome nas últimas 24 horas
+        var exists = clientesAtendidosData.some(function(c) {
+            return c.cliente === nomeCliente && c.data === now.toLocaleDateString('pt-BR');
+        });
+
+        if (!exists && nomeCliente !== 'Cliente Anônimo') {
+            var assuntos = ['Dúvida sobre medicamento', 'Farmácia Popular', 'Agendamento', 'Consulta', 'Preço',
+                'Efeitos colaterais', 'Interação medicamentosa', 'Receita médica', 'Validade', 'Armazenamento'
+            ];
+            var statuses = ['✅ Finalizado', '⏳ Em andamento', '🔄 Encaminhado', '📋 Agendado'];
+
+            clientesAtendidosData.push({
+                id: clientesIdCounter++,
+                cliente: nomeCliente,
+                telefone: '(91) 9' + String(Math.floor(1000 + Math.random() * 9000)) + '-' + String(Math.floor(1000 + Math.random() * 9000)),
+                data: now.toLocaleDateString('pt-BR'),
+                hora: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                dataTimestamp: now.getTime(),
+                tempo: (Math.random() * 5 + 1).toFixed(1) + ' min',
+                assunto: assuntos[Math.floor(Math.random() * assuntos.length)],
+                status: statuses[Math.floor(Math.random() * statuses.length)],
+                atendente: ['João Silva', 'Maria Oliveira', 'Carlos Pereira', 'Ana Souza'][Math.floor(Math.random() * 4)]
+            });
+
+            oneBotClientesAtendidos++;
+            atualizarMetricasOneBot();
+            renderizarClientesAtendidos();
+        }
+    }
+
+    function processarPerguntaOneBot(pergunta) {
+        var texto = pergunta.toLowerCase();
+
+        setTimeout(function() {
+            var resposta = '';
+
+            if (texto.includes('como tomar') || texto.includes('como tomar este') || texto.includes('tomar')) {
+                resposta = respostasOneBot['como tomar'];
+            } else if (texto.includes('efeito colateral') || texto.includes('efeitos colaterais') || texto.includes('reação')) {
+                resposta = respostasOneBot['efeitos colaterais'];
+            } else if (texto.includes('interação') || texto.includes('interações') || texto.includes('misturar')) {
+                resposta = respostasOneBot['interação'];
+            } else if (texto.includes('preço') || texto.includes('custa') || texto.includes('valor')) {
+                resposta = respostasOneBot['preço'];
+            } else if (texto.includes('farmácia popular') || texto.includes('popular')) {
+                resposta = respostasOneBot['farmácia popular'];
+            } else if (texto.includes('receita') || texto.includes('receita médica') || texto.includes('controlado')) {
+                resposta = respostasOneBot['receita'];
+            } else if (texto.includes('validade') || texto.includes('vencimento')) {
+                resposta = respostasOneBot['validade'];
+            } else if (texto.includes('armazenar') || texto.includes('guardar') || texto.includes('conservar')) {
+                resposta = respostasOneBot['armazenamento'];
+            } else if (texto.includes('dor de cabeça') || texto.includes('cabeça') || texto.includes('enxaqueca')) {
+                resposta = respostasOneBot['dor de cabeça'];
+            } else if (texto.includes('obrigado') || texto.includes('obrigada') || texto.includes('valeu')) {
+                resposta = '😊 <strong>Por nada! Foi um prazer ajudar.</strong><br><br>Continue cuidando da sua saúde! 🏥';
+            } else if (texto.includes('oi') || texto.includes('olá') || texto.includes('ola')) {
+                resposta = '👋 <strong>Olá!</strong><br><br>Como posso ajudar você hoje? Posso falar sobre medicamentos, Farmácia Popular, agendamentos e muito mais!';
+            } else {
+                if (texto.includes('medicamento') || texto.includes('remédio') || texto.includes('remedio')) {
+                    resposta = '💊 <strong>Sobre medicamentos:</strong><br><br>• Temos uma grande variedade de medicamentos.<br>• Consulte nosso farmacêutico para orientações.<br>• Verifique disponibilidade no estoque.<br>• Aceitamos Farmácia Popular e convênios.';
+                } else if (texto.includes('saúde') || texto.includes('saude')) {
+                    resposta = '🏥 <strong>Saúde e bem-estar:</strong><br><br>• Mantenha uma alimentação saudável.<br>• Pratique atividades físicas regularmente.<br>• Beba bastante água.<br>• Consulte seu médico regularmente.<br>• Nossa farmácia está aqui para ajudar!';
+                } else {
+                    resposta = respostasOneBot['padrão'];
+                }
+            }
+
+            adicionarMensagemOneBot(resposta);
+
+            oneBotDuvidasRespondidas++;
+            atualizarMetricasOneBot();
+
+        }, 800);
+    }
+
+    function perguntaRapida(texto) {
+        document.getElementById('onebotChatInput').value = texto;
+        enviarMensagemOneBot();
+    }
+
+    // ================================================================
+    // ===== SERVIÇOS =====
+    // ================================================================
+
+    function servicoOneBot(servico) {
+        adicionarMensagemUsuario('🛎️ ' + servico);
+
+        setTimeout(function() {
+            var respostasServicos = {
+                'Agendar Farmácia Popular': '🏥 <strong>Farmácia Popular - Agendamento:</strong><br><br>• Agendamento confirmado! ✅<br>• Compareça com seu CPF e receita médica.<br>• Atendimento preferencial para Farmácia Popular.<br>• Horário: ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '<br>• Traga seus documentos. 😊',
+
+                'Verificar Medicamentos': '💊 <strong>Verificação de Medicamentos:</strong><br><br>• Estamos verificando a disponibilidade...<br>• Paracetamol 500mg - ✅ Disponível<br>• Dipirona 1g - ✅ Disponível<br>• Amoxicilina 500mg - ⚠️ Estoque baixo<br>• Ibuprofeno 600mg - ✅ Disponível<br><br>🔍 Para mais informações, consulte o balcão.',
+
+                'Agendar Retirada': '📦 <strong>Agendamento de Retirada:</strong><br><br>• Retirada agendada com sucesso! ✅<br>• Data: ' + new Date().toLocaleDateString('pt-BR') + '<br>• Horário: ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '<br>• Traga seu pedido de retirada.<br>• Prazo de 24 horas para retirada. ⏰',
+
+                'Agendar Consulta': '👨‍⚕️ <strong>Agendamento de Consulta:</strong><br><br>• Consulta agendada com sucesso! 📋<br>• Especialidade: Clínica Geral<br>• Data: ' + new Date().toLocaleDateString('pt-BR') + '<br>• Horário: ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '<br>• Confirme sua presença com 24h de antecedência. ✅',
+
+                'Falar com Farmacêutico': '💬 <strong>Farmacêutico - Atendimento:</strong><br><br>• Encaminhando para um farmacêutico... 🔄<br>• Aguarde um momento, por favor.<br>• O farmacêutico estará disponível em breve.<br>• Tempo estimado: 2 minutos. ⏱️',
+
+                'Programar Lembrete': '🔔 <strong>Lembrete Programado:</strong><br><br>• Lembrete criado com sucesso! ✅<br>• Você receberá uma notificação no horário agendado.<br>• Confirme seu lembrete em "Lembretes Ativos".<br>• Não esqueça de tomar seus medicamentos! 💊'
+            };
+
+            var resposta = respostasServicos[servico] || '🛎️ <strong>Serviço solicitado com sucesso!</strong><br><br>• Estamos processando sua solicitação.<br>• Em breve um atendente entrará em contato.<br>• Obrigado por usar o OneBot! 😊';
+
+            adicionarMensagemOneBot(resposta);
+            oneBotEncaminhamentos++;
+            atualizarMetricasOneBot();
+        }, 1000);
+    }
+
+    // ================================================================
+    // ===== LEMBRETES =====
+    // ================================================================
+
+    function adicionarLembrete() {
+        var medicamento = prompt('💊 Digite o nome do medicamento para o lembrete:');
+        if (!medicamento) return;
+
+        var horario = prompt('🕐 Digite o horário (ex: 10:00):');
+        if (!horario) return;
+
+        var container = document.getElementById('onebotLembretesContainer');
+        if (!container) return;
+
+        var div = document.createElement('div');
+        div.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #e8edf4; font-size:13px;';
+        div.innerHTML = `
+            <span>💊 Tomar ${medicamento}</span>
+            <span style="color:var(--text-muted); font-size:11px;">${horario}</span>
+            <button class="btn-danger btn-sm" style="padding:2px 8px; font-size:10px;" onclick="removerLembrete(this)">✕</button>
+        `;
+        container.appendChild(div);
+
+        alert('🔔 Lembrete criado com sucesso!\n\n💊 Medicamento: ' + medicamento + '\n🕐 Horário: ' + horario);
+    }
+
+    function removerLembrete(elemento) {
+        if (confirm('❌ Deseja remover este lembrete?')) {
+            var div = elemento.parentElement;
+            div.remove();
+            alert('🗑️ Lembrete removido com sucesso!');
+        }
+    }
+
+    // ================================================================
+    // ===== FUNÇÕES DE RELATÓRIO E CONFIGURAÇÃO =====
+    // ================================================================
+
+    function gerarRelatorioOneBot() {
+        alert('📊 RELATÓRIO ONEBOT\n' +
+              '================================\n\n' +
+              '💬 Atendimentos hoje: ' + oneBotAtendimentosHoje + '\n' +
+              '😊 Taxa de satisfação: ' + oneBotSatisfacao + '%\n' +
+              '📝 Dúvidas respondidas: ' + oneBotDuvidasRespondidas + '\n' +
+              '🔄 Encaminhamentos: ' + oneBotEncaminhamentos + '\n' +
+              '⏱️ Tempo médio: ' + oneBotTempoMedio.toFixed(1) + ' min\n' +
+              '📈 Total atendimentos (mês): ' + oneBotTotalAtendimentos + '\n' +
+              '👥 Clientes atendidos: ' + oneBotClientesAtendidos + '\n' +
+              '⭐ Avaliação média: ' + oneBotAvaliacaoMedia.toFixed(1) + ' ★\n' +
+              '🔄 Taxa de resolução: ' + oneBotTaxaResolucao + '%\n\n' +
+              '📅 Gerado em: ' + new Date().toLocaleString('pt-BR'));
+    }
+
+    function configurarOneBot() {
+        document.getElementById('configOneBotModal').classList.add('active');
+    }
+
+    // ================================================================
+    // ===== EVENTOS =====
+    // ================================================================
+
+    document.getElementById('onebotSendBtn').addEventListener('click', enviarMensagemOneBot);
+
+    document.getElementById('onebotChatInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            enviarMensagemOneBot();
+        }
+    });
+
+    // Card de clientes atendidos no dashboard - clicável
+    document.querySelector('.card-stat[style*="background:#FFF8E1;"]')?.addEventListener('click', function() {
+        verClientesAtendidos();
+    });
+
+    // Modal clientes
+    document.getElementById('closeClientesAtendidosModal').addEventListener('click', function() {
+        document.getElementById('clientesAtendidosModal').classList.remove('active');
+    });
+
+    document.getElementById('clientesAtendidosModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+        }
+    });
+
+    // Configuração
+    document.getElementById('closeConfigOneBotModal').addEventListener('click', function() {
+        document.getElementById('configOneBotModal').classList.remove('active');
+    });
+
+    document.getElementById('configOneBotCancelar').addEventListener('click', function() {
+        document.getElementById('configOneBotModal').classList.remove('active');
+    });
+
+    document.getElementById('configOneBotSalvar').addEventListener('click', function() {
+        alert('✅ Configurações salvas com sucesso!\n\n' +
+              '📝 Nome: ' + document.getElementById('configOneBotNome').value + '\n' +
+              '⏱️ Tempo: ' + document.getElementById('configOneBotTempo').value + ' segundos\n' +
+              '🌐 Idioma: ' + document.getElementById('configOneBotIdioma').value + '\n' +
+              '🎨 Tema: ' + document.getElementById('configOneBotTema').value);
+        document.getElementById('configOneBotModal').classList.remove('active');
+    });
+
+    document.getElementById('configOneBotModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+        }
+    });
+
+    // ================================================================
+    // ===== INICIALIZAÇÃO =====
+    // ================================================================
+
+    document.addEventListener('DOMContentLoaded', initOneBot);
+</script>
 
     <!-- ===== RODAPÉ ===== -->
     <footer>
