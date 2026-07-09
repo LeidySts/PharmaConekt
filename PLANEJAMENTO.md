@@ -853,6 +853,7 @@ Estrutura dos Squads:
     Vendas (1 SDR): Prospecção activa via WhatsApp e visitas físicas em Belém.
 ```
 ```
+
 ## 8. MODELO DE PRECIFICAÇÃO E RECEITA
 
 O modelo comercial foi estruturado especificamente para o formato SaaS (Software as a Service) B2B, focado na recorrência.
@@ -860,18 +861,19 @@ O modelo comercial foi estruturado especificamente para o formato SaaS (Software
 
     Plano Loja Individual: R$ 199,00 por mês.
 
-    Plano Rede (Até 5 lojas integradas): R$ 399,00 por mês.
+    Plano Rede (Até 5 lojas integradas): R$ 499,00 por mês.
 
 8.2. Investimento do MVP (Preço Fixo)
 
 Para a construção, validação e estabilização do barramento Flask com banco SQLite que você possui no código, o valor comercial fechado do projeto está estipulado em R$ 120.000,00, com pagamentos atrelados aos seguintes marcos técnicos:
 
-    30% na Entrada: Homologação dos protótipos de tela.
+    30% na Entrada: UI completa + 21 módulos.
 
     30% na Entrega Intermediária: Banco de dados SQLite estruturado e rotas de CRUD operacionais.
 
-    40% no Encerramento: Liberação do Dashboard com métricas e homologação concluída.
+    40% no Encerramento: Liberação do Dashboard Estratégicos + Analitico + Fidelidades + Insights + Alertas. 
 
+    
 ## 9. METODOLOGIA OKR E KPIs SEMANAIS
 
 Alinhado aos objetivos estratégicos do negócio, a gestão monitora o desempenho através de metas anuais e indicadores semanais.
