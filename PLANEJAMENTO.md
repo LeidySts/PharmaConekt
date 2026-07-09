@@ -356,29 +356,468 @@ graph TD
 ## 6. DIAGRAMA DE CLASSES
 
 Estrutura das tabelas de dados gerenciadas pelas models do Flask:
+
+## 6.1 MÓDULO DE SEGURANÇA E AUTENTICAÇÃO
 ```mermaid
 classDiagram
     class Usuario {
-        +int id
-        +String nome
-        +String username
-        +String password_hash
-        +fazer_login()
-    }
-    class Loja {
-        +int id
-        +String nome
-        +String cnpj
-        +String pdv_sistema
-        +String status_onboarding
-        +int sugestoes_aceitas
-        +int alertas_vencimento
-        +cadastrar()
-        +editar()
-        +excluir()
+        -int id
+        -String nome
+        -String email
+        -String password_hash
+        -String perfil
+        -DateTime created_at
+        -DateTime updated_at
+        +login() bool
+        +logout() void
+        +tem_permissao(String modulo) bool
     }
 
-    Usuario "1" --> "0..*" Loja : Gerencia/Monitora
+    class Perfil {
+        -int id
+        -String nome
+        -String descricao
+        -List~String~ permissoes
+        +add_permissao(String modulo) void
+        +remove_permissao(String modulo) void
+    }
+
+    class Sessao {
+        -int id
+        -int usuario_id
+        -String token
+        -DateTime expiracao
+        +validar() bool
+        +renovar() void
+    }
+
+    Usuario "1" --> "1" Perfil : Possui
+    Usuario "1" --> "0..*" Sessao : Possui
+```
+
+## 6.2 MÓDULO OPERACIONAL (PDV + ESTOQUE)
+```mermaid
+classDiagram
+    class PDV {
+        -int id
+        -int loja_id
+        -int caixa_id
+        -String status
+        -DateTime abertura
+        -DateTime fechamento
+        +abrir() bool
+        +fechar() bool
+        +registrar_venda(Venda venda) bool
+        +consultar() Dict
+    }
+
+    class Carrinho {
+        -int id
+        -int pdv_id
+        -int cliente_id
+        -List~ItemVenda~ itens
+        -float desconto
+        -float total
+        +adicionar_item(Produto produto, int quantidade) void
+        +remover_item(int item_id) void
+        +aplicar_desconto(float percentual) void
+        +finalizar() Venda
+    }
+
+    class Estoque {
+        -int id
+        -int produto_id
+        -int loja_id
+        -int quantidade
+        -int quantidade_minima
+        +consultar() int
+        +ajustar(int nova_quantidade) void
+        +verificar_critico() bool
+        +transferir(int quantidade, Loja destino) bool
+    }
+
+    class MovimentacaoEstoque {
+        -int id
+        -int produto_id
+        -int loja_id
+        -int quantidade
+        -String tipo
+        -String motivo
+        -DateTime data
+        +registrar() void
+    }
+
+    PDV "1" --> "0..*" Carrinho : Possui
+    Carrinho "1" --> "0..*" ItemVenda : Contém
+    Estoque "1" --> "0..*" MovimentacaoEstoque : Registra
+    Produto "1" --> "0..*" Estoque : Possui
+```
+
+## 6.3 MÓDULO DE FIDELIDADE
+```mermaid
+classDiagram
+    class Fidelidade {
+        -int id
+        -int cliente_id
+        -int pontos
+        -String nivel
+        -DateTime data_atualizacao
+        +acumular_pontos(int pontos) void
+        +resgatar_pontos(int pontos, String produto) bool
+        +calcular_nivel() String
+        +get_pontos_para_proximo_nivel() int
+    }
+
+    class NivelFidelidade {
+        -String nome
+        -int pontos_minimo
+        -int pontos_maximo
+        -float desconto
+        -String beneficios
+        +get_nivel_by_pontos(int pontos) String
+        +get_desconto(String nivel) float
+    }
+
+    class HistoricoPontos {
+        -int id
+        -int fidelidade_id
+        -String descricao
+        -int pontos
+        -String tipo
+        -DateTime data
+        +registrar() void
+    }
+
+    class Resgate {
+        -int id
+        -int fidelidade_id
+        -String produto
+        -int pontos_gastos
+        -DateTime data
+        +confirmar() bool
+        +cancelar() bool
+    }
+
+    Fidelidade "1" --> "1" NivelFidelidade : Possui
+    Fidelidade "1" --> "0..*" HistoricoPontos : Registra
+    Fidelidade "1" --> "0..*" Resgate : Realiza
+```
+
+## 6.4 MÓDULO FINANCEIRO
+```mermaid
+classDiagram
+    class MovimentacaoFinanceira {
+        -int id
+        -String tipo
+        -String descricao
+        -String categoria
+        -float valor
+        -Date data
+        -Date vencimento
+        -String fornecedor
+        -String forma_pagamento
+        -String status
+        -String observacoes
+        +registrar() bool
+        +pagar() bool
+        +editar() bool
+        +excluir() bool
+    }
+
+    class CategoriaFinanceira {
+        -int id
+        -String nome
+        -String tipo
+        -String cor
+        +get_by_tipo(String tipo) List~CategoriaFinanceira~
+    }
+
+    class FluxoCaixa {
+        -int id
+        -Date periodo_inicio
+        -Date periodo_fim
+        -float total_entradas
+        -float total_saidas
+        -float saldo
+        +calcular() Dict
+        +gerar_relatorio() String
+    }
+
+    class DRE {
+        -int id
+        -Date periodo
+        -float receitas_totais
+        -float custos_totais
+        -float despesas_operacionais
+        -float impostos
+        -float lucro_liquido
+        -float margem_lucro
+        +calcular() Dict
+        +gerar_relatorio() String
+    }
+
+    class Fornecedor {
+        -int id
+        -String nome
+        -String cnpj
+        -String telefone
+        -float total_compras
+        -String status
+        +cadastrar() bool
+        +editar() bool
+        +excluir() bool
+    }
+
+    MovimentacaoFinanceira "1" --> "1" CategoriaFinanceira : Pertence
+    MovimentacaoFinanceira "1" --> "0..1" Fornecedor : Vinculado
+    FluxoCaixa "1" --> "0..*" MovimentacaoFinanceira : Agrupa
+    DRE "1" --> "0..*" MovimentacaoFinanceira : Agrupa
+```
+
+## 6.5 MÓDULO DE INSIGHTS E DASHBOARD
+```mermaid
+classDiagram
+    class Dashboard {
+        -int id
+        -int loja_id
+        -float total_receitas
+        -float total_vendas
+        -int transacoes
+        -float ticket_medio
+        -int clientes_ativos
+        -DateTime data
+        +calcular_metricas() Dict
+        +gerar_graficos() Dict
+        +atualizar() void
+    }
+
+    class Insight {
+        -int id
+        -String tipo
+        -String descricao
+        -Dict dados
+        -float preco_sugerido
+        -float preco_mercado
+        -DateTime data
+        +analisar_precos() Dict
+        +sugerir_preco() float
+        +prever_vendas() Dict
+    }
+
+    class Alertas {
+        -int id
+        -String tipo
+        -String mensagem
+        -Date data_criacao
+        -int produto_id
+        -int loja_id
+        -boolean visualizado
+        +criar() bool
+        +visualizar() void
+        +get_alertas_ativos() List~Alertas~
+    }
+
+    class Relatorio {
+        -int id
+        -String titulo
+        -String tipo
+        -Dict dados
+        -DateTime data_criacao
+        +gerar() String
+        +exportar(String formato) File
+        +imprimir() void
+    }
+
+    Dashboard "1" --> "0..*" Insight : Gera
+    Alertas "1" --> "0..1" Produto : Notifica
+    Dashboard "1" --> "0..*" Relatorio : Cria
+```
+
+## 6.6 MÓDULO DE INTEGRAÇÃO (ONEBOT)
+```mermaid
+classDiagram
+    class OneBot {
+        -int id
+        -String nome
+        -String idioma
+        -int tempo_resposta
+        -String tema
+        -String saudacao
+        -DateTime created_at
+        -DateTime updated_at
+        +responder(String pergunta) String
+        +agendar_servico(String servico) bool
+        +programar_lembrete(String medicamento, String horario) bool
+        +get_estatisticas() Dict
+    }
+
+    class ChatOneBot {
+        -int id
+        -String cliente
+        -String mensagem
+        -String resposta
+        -DateTime data
+        +salvar() void
+        +get_historico(String cliente) List~ChatOneBot~
+    }
+
+    class PerguntaFrequente {
+        -int id
+        -String pergunta
+        -String resposta
+        -String categoria
+        -int frequencia
+        +cadastrar() bool
+        +editar() bool
+        +excluir() bool
+    }
+
+    class Lembrete {
+        -int id
+        -int onebot_id
+        -String medicamento
+        -String horario
+        -boolean ativo
+        -DateTime created_at
+        +ativar() void
+        +desativar() void
+        +notificar() void
+    }
+
+    class Agendamento {
+        -int id
+        -int onebot_id
+        -String servico
+        -DateTime data
+        -String cliente
+        -String status
+        +confirmar() bool
+        +cancelar() bool
+        +reagendar(DateTime nova_data) bool
+    }
+
+    OneBot "1" --> "0..*" ChatOneBot : Possui
+    OneBot "1" --> "0..*" PerguntaFrequente : Utiliza
+    OneBot "1" --> "0..*" Lembrete : Cria
+    OneBot "1" --> "0..*" Agendamento : Gerencia
+```
+
+## 6.7 MÓDULO DE ENTREGAS
+```mermaid
+classDiagram
+    class Entrega {
+        -int id
+        -int venda_id
+        -String cliente
+        -String telefone
+        -String endereco
+        -String produto
+        -String entregador
+        -float valor
+        -String status
+        -int prazo
+        -String observacoes
+        -DateTime data_criacao
+        -DateTime data_entrega
+        +atualizar_status(String novo_status) void
+        +cancelar() bool
+        +get_historico_status() List~StatusEntrega~
+    }
+
+    class StatusEntrega {
+        -int id
+        -int entrega_id
+        -String status
+        -DateTime data
+        +registrar() void
+    }
+
+    class Entregador {
+        -int id
+        -String nome
+        -String telefone
+        -String veiculo
+        -String placa
+        -String status
+        -List~Entrega~ entregas
+        +atribuir_entrega(Entrega entrega) void
+        +finalizar_entrega(int entrega_id) void
+        +get_entregas_dia() List~Entrega~
+    }
+
+    class Rota {
+        -int id
+        -String origem
+        -String destino
+        -float distancia
+        -int tempo_estimado
+        +calcular_rota(String origem, String destino) Dict
+    }
+
+    Entrega "1" --> "0..*" StatusEntrega : Possui
+    Entrega "1" --> "0..1" Entregador : Atribuida
+    Entregador "1" --> "0..*" Rota : Utiliza
+```
+
+## 6.8 MÓDULO DE MULTI LOJAS
+```mermaid
+classDiagram
+    class Loja {
+        -int id
+        -String nome
+        -String cnpj
+        -String endereco
+        -String telefone
+        -String pdv_sistema
+        -String status_onboarding
+        -int sugestoes_aceitas
+        -int alertas_vencimento
+        +cadastrar() bool
+        +editar() bool
+        +excluir() bool
+        +ativar() void
+        +desativar() void
+    }
+
+    class Transferencia {
+        -int id
+        -int produto_id
+        -int loja_origem_id
+        -int loja_destino_id
+        -int quantidade
+        -String motivo
+        -String status
+        -DateTime data
+        +confirmar() bool
+        +cancelar() bool
+    }
+
+    class ProdutoLoja {
+        -int id
+        -int produto_id
+        -int loja_id
+        -int quantidade
+        -DateTime updated_at
+        +transferir(int quantidade, Loja destino) bool
+        +ajustar(int nova_quantidade) void
+    }
+
+    class RelatorioConsolidado {
+        -int id
+        -int loja_id
+        -float total_vendas
+        -int total_clientes
+        -float total_faturamento
+        -int total_produtos
+        -DateTime data
+        +gerar() Dict
+        +comparar() Dict
+    }
+
+    Loja "1" --> "0..*" Transferencia : Envia/Recebe
+    Loja "1" --> "0..*" ProdutoLoja : Possui
+    Loja "1" --> "0..*" RelatorioConsolidado : Gera
+    Produto "1" --> "0..*" ProdutoLoja : Distribui
 ```
 
 ## 7. COMPOSIÇÃO DA EQUIPE (SQUADS FUNCIONAIS)
