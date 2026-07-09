@@ -20,24 +20,145 @@ A decomposição hierárquica do trabalho para a construção completa do ecossi
 
 ```mermaid
 graph TD
-    A[PharmaConekt MVP] --> B[1. Discovery & Design]
-    A --> C[2. Desenvolvimento]
-    A --> D[3. Testes & QA]
-    A --> E[4. Lançamento]
+    A[🏥 PharmaConekt<br/>Ecossistema Completo] --> B[1. FUNDAÇÃO DO SISTEMA]
+    A --> C[2. NÚCLEO OPERACIONAL]
+    A --> D[3. ESTRATÉGIA & CRESCIMENTO]
+    A --> E[4. COMERCIAL & CLIENTES]
+    A --> F[5. FINANCEIRO]
+    A --> G[6. INTEGRAÇÃO & SUPORTE]
 
-    B --> B1[1.1 Pesquisa com Farmácias]
-    B --> B2[1.2 Backlog & Requisitos]
-    B --> B3[1.3 Protótipos de Interface]
+    B --> B1[Planejamento]
+    B --> B2[Arquitetura]
+    B --> B3[Infraestrutura]
+    B --> B4[Segurança]
+    B --> B5[UI/UX Design]
 
-    C --> C1[2.1 Banco de Dados SQLite]
-    C --> C2[2.2 Rotas e CRUD Flask]
-    C --> C3[2.3 Painel de Métrica/KPI]
+    C --> C1[🛒 PDV]
+    C --> C2[📦 Estoque]
+    C --> C3[🏢 Multi Lojas]
+    C --> C4[🖥️ Caixas]
+    C --> C5[🛵 Entregas]
+    C --> C6[🛒 Compras]
 
-    D --> D1[3.1 Testes Unitários]
-    D --> D2[3.2 Homologação com Pilotos]
-    E --> E1[4.1 Deploy em Nuvem Cloud]
-    E --> E2[4.2 Treinamento de Usuários]
+    D --> D1[📊 Dashboard]
+    D --> D2[⭐ Fidelidade]
+    D --> D3[📈 Insights]
+    D --> D4[🔔 Alertas]
+
+    E --> E1[👤 Clientes]
+    E --> E2[👔 Funcionários]
+    E --> E3[📈 Vendas]
+    E --> E4[💰 Comissões]
+
+    F --> F1[📋 Contas]
+    F --> F2[💵 Fluxo de Caixa]
+    F --> F3[📊 DRE]
+    F --> F4[🏢 Fornecedores]
+    F --> F5[📄 Exportação]
+
+    G --> G1[🤖 OneBot]
+    G --> G2[🔗 Integrações]
+    G --> G3[⚙️ Configurações]
+    G --> G4[💬 Suporte]
+    G --> G5[📋 Relatórios]
+
+    classDef raiz fill:#003366,color:#fff,stroke:#002244,stroke-width:2px,font-size:16px
+    classDef nivel1 fill:#1a4f7a,color:#fff,stroke:#002244,stroke-width:2px
+    classDef nivel2 fill:#e8edf4,color:#1a2a3a,stroke:#d5dde8,stroke-width:1px
+
+    class A raiz
+    class B,C,D,E,F,G nivel1
+    class B1,B2,B3,B4,B5,C1,C2,C3,C4,C5,C6,D1,D2,D3,D4,E1,E2,E3,E4,F1,F2,F3,F4,F5,G1,G2,G3,G4,G5 nivel2
 ```
+
+## 2.1 VERSÃO INTERATIVA POR MÓDULO
+```mermaid
+graph LR
+    subgraph "1. FUNDAÇÃO"
+        B1[Planejamento] --> B2[Arquitetura]
+        B2 --> B3[Infraestrutura]
+        B3 --> B4[Segurança]
+        B4 --> B5[UI/UX Design]
+    end
+
+    subgraph "2. NÚCLEO OPERACIONAL"
+        C1[🛒 PDV] --> C2[📦 Estoque]
+        C2 --> C3[🏢 Multi Lojas]
+        C3 --> C4[🖥️ Caixas]
+        C4 --> C5[🛵 Entregas]
+        C5 --> C6[🛒 Compras]
+    end
+
+    subgraph "3. ESTRATÉGIA"
+        D1[📊 Dashboard] --> D2[⭐ Fidelidade]
+        D2 --> D3[📈 Insights]
+        D3 --> D4[🔔 Alertas]
+    end
+
+    subgraph "4. COMERCIAL"
+        E1[👤 Clientes] --> E2[👔 Funcionários]
+        E2 --> E3[📈 Vendas]
+        E3 --> E4[💰 Comissões]
+    end
+
+    subgraph "5. FINANCEIRO"
+        F1[📋 Contas] --> F2[💵 Fluxo de Caixa]
+        F2 --> F3[📊 DRE]
+        F3 --> F4[🏢 Fornecedores]
+        F4 --> F5[📄 Exportação]
+    end
+
+    subgraph "6. INTEGRAÇÃO"
+        G1[🤖 OneBot] --> G2[🔗 Integrações]
+        G2 --> G3[⚙️ Configurações]
+        G3 --> G4[💬 Suporte]
+        G4 --> G5[📋 Relatórios]
+    end
+
+    C2 -.-> D1
+    C1 -.-> E1
+    C6 -.-> F1
+    E1 -.-> D2
+    F3 -.-> D1
+    G1 -.-> E1
+
+    classDef subg fill:#f0f4f9,color:#1a2a3a,stroke:#d5dde8,stroke-width:2px
+    classDef modulo fill:#e8edf4,color:#1a2a3a,stroke:#d5dde8,stroke-width:1px
+    
+    class B1,B2,B3,B4,B5,C1,C2,C3,C4,C5,C6,D1,D2,D3,D4,E1,E2,E3,E4,F1,F2,F3,F4,F5,G1,G2,G3,G4,G5 modulo
+```
+
+## 2.2 MATRIZ DE DEPENDÊNCIAS
+```mermaid
+graph TD
+    subgraph "DEPENDÊNCIAS ENTRE MÓDULOS"
+        A[1. FUNDAÇÃO] --> B[2. NÚCLEO OPERACIONAL]
+        A --> C[3. ESTRATÉGIA]
+        A --> D[4. COMERCIAL]
+        A --> E[5. FINANCEIRO]
+        A --> F[6. INTEGRAÇÃO]
+
+        B --> C
+        B --> D
+        B --> E
+        B --> F
+
+        C --> D
+        C --> E
+
+        D --> E
+        D --> F
+
+        E --> F
+    end
+
+    classDef dep fill:#003366,color:#fff,stroke:#002244,stroke-width:2px
+    class A,B,C,D,E,F dep
+```
+
+
+
+
 
 
 
