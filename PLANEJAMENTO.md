@@ -202,24 +202,154 @@ stateDiagram-v2
     Lançamento --> [*] : Marco 4: Sistema em Produção
 ```
 
-## 5. DIAGRAMA DE CASOS DE USO
+## 5. DIAGRAMA DE CASO DE USOS 
 
 Interações de atores externos e usuários com as funcionalidades previstas no escopo do MVP:
 
+## 5.1 DIAGRAMA DETALHADO - DONO/ADMINISTRADOR
+
 ```mermaid
-graph LR
-    admin[Administrador Master] --- uc1(Fazer Login)
-    admin --- uc2(Cadastrar Loja)
-    admin --- uc3(Listar Lojas)
+graph TD
+    subgraph "DONO/ADMINISTRADOR - PERMISSÕES TOTAIS"
+        A1[👑 Dono/Administrador]
+        
+        A1 --> PDV[PDV]
+        A1 --> ESTOQUE[Estoque]
+        A1 --> FIDELIDADE[Fidelidade]
+        A1 --> FINANCEIRO[Financeiro]
+        A1 --> INSIGHTS[Insights]
+        A1 --> GESTAO[Gestão]
+        A1 --> CONFIG[Configurações]
+        A1 --> RELATORIOS[Relatórios]
+        A1 --> ONEBOT[OneBot]
 
-    dono[Dono de Farmácia] --- uc1
-    dono --- uc4(Ver Dashboard de KPIs)
+        PDV --> P1[Realizar Venda]
+        PDV --> P2[Consultar Histórico]
+        PDV --> P3[Gerenciar Caixas]
 
-    cs[Operador de Onboarding] --- uc1
-    cs --- uc5(Consultar Integração)
-    cs --- uc6(Atualizar Status da Loja)
+        ESTOQUE --> E1[Gerenciar Estoque]
+        ESTOQUE --> E2[Cadastrar Produtos]
+        ESTOQUE --> E3[Transferir Produtos]
+        ESTOQUE --> E4[Receber XML]
 
-    pdv[Sistema de PDV Externo] --- uc7(Importar Dados de Vendas)
+        FIDELIDADE --> F1[Configurar Programa]
+        FIDELIDADE --> F2[Ver Todos Clientes]
+        FIDELIDADE --> F3[Ver Relatórios]
+
+        FINANCEIRO --> FI1[Gerenciar Contas]
+        FINANCEIRO --> FI2[Visualizar DRE]
+        FINANCEIRO --> FI3[Visualizar Fluxo]
+        FINANCEIRO --> FI4[Exportar Relatórios]
+
+        INSIGHTS --> I1[Ver Dashboard]
+        INSIGHTS --> I2[Ver Alertas]
+        INSIGHTS --> I3[Analisar Mercado]
+
+        GESTAO --> G1[Gerenciar Funcionários]
+        GESTAO --> G2[Gerenciar Lojas]
+        GESTAO --> G3[Gerenciar Clientes]
+        GESTAO --> G4[Gerenciar Fornecedores]
+
+        CONFIG --> C1[Configurar Sistema]
+        CONFIG --> C2[Backup em Nuvem]
+        CONFIG --> C3[Gerenciar Permissões]
+        CONFIG --> C4[Integrações]
+
+        RELATORIOS --> R1[Relatório Financeiro]
+        RELATORIOS --> R2[Relatório Vendas]
+        RELATORIOS --> R3[Relatório Estoque]
+        RELATORIOS --> R4[Relatório Fidelidade]
+        RELATORIOS --> R5[Relatório Gerencial]
+
+        ONEBOT --> O1[Configurar OneBot]
+        ONEBOT --> O2[Ver Atendimentos]
+        ONEBOT --> O3[Ver Estatísticas]
+    end
+
+    classDef dono fill:#003366,color:#fff,stroke:#002244,stroke-width:2px,font-size:16px
+    classDef modulo fill:#1a4f7a,color:#fff,stroke:#002244,stroke-width:1px
+    classDef caso fill:#e8edf4,color:#1a2a3a,stroke:#d5dde8,stroke-width:1px
+
+    class A1 dono
+    class PDV,ESTOQUE,FIDELIDADE,FINANCEIRO,INSIGHTS,GESTAO,CONFIG,RELATORIOS,ONEBOT modulo
+    class P1,P2,P3,E1,E2,E3,E4,F1,F2,F3,FI1,FI2,FI3,FI4,I1,I2,I3,G1,G2,G3,G4,C1,C2,C3,C4,R1,R2,R3,R4,R5,O1,O2,O3 caso
+
+   ```
+
+## 5.2 DIAGRAMA DETALHADO - VENDEDOR
+
+```mermaid
+graph TD
+    subgraph "VENDEDOR - PERMISSÕES OPERACIONAIS"
+        A3[🛒 Vendedor]
+        
+        A3 --> PDV[PDV]
+        A3 --> ESTOQUE[Estoque]
+        A3 --> FIDELIDADE[Fidelidade]
+        A3 --> CLIENTES[Clientes]
+
+        PDV --> P1[Realizar Venda]
+        PDV --> P2[Buscar Produto]
+        PDV --> P3[Adicionar ao Carrinho]
+        PDV --> P4[Finalizar Compra]
+        PDV --> P5[Emitir Comprovante]
+        PDV --> P6[Consultar Bula]
+        PDV --> P7[Aplicar Desconto]
+        PDV --> P8[Sugerir Produtos]
+        PDV --> P9[Registrar Cliente]
+
+        ESTOQUE --> E1[Consultar Estoque]
+        ESTOQUE --> E2[Ver Alertas]
+
+        FIDELIDADE --> F1[Ver Pontos Cliente]
+        FIDELIDADE --> F2[Resgatar Pontos]
+
+        CLIENTES --> C1[Consultar Clientes]
+        CLIENTES --> C2[Cadastrar Cliente]
+    end
+
+    classDef vendedor fill:#f5a623,color:#333,stroke:#e69500,stroke-width:2px,font-size:16px
+    classDef modulo fill:#f9a825,color:#333,stroke:#e69500,stroke-width:1px
+    classDef caso fill:#e8edf4,color:#1a2a3a,stroke:#d5dde8,stroke-width:1px
+
+    class A3 vendedor
+    class PDV,ESTOQUE,FIDELIDADE,CLIENTES modulo
+    class P1,P2,P3,P4,P5,P6,P7,P8,P9,E1,E2,F1,F2,C1,C2 caso
+
+
+   ```
+
+## 5.3 DIAGRAMA DETALHADO - CLIENTE
+
+```mermaid
+graph TD
+    subgraph "CLIENTE - INTERAÇÕES PÚBLICAS"
+        A5[👤 Cliente]
+        
+        A5 --> PDV[PDV]
+        A5 --> FIDELIDADE[Fidelidade]
+        A5 --> ONEBOT[OneBot]
+
+        PDV --> P1[Realizar Compra]
+        PDV --> P2[Emitir Comprovante]
+        PDV --> P3[Consultar Bula]
+
+        FIDELIDADE --> F1[Ver Pontos]
+        FIDELIDADE --> F2[Resgatar Pontos]
+        FIDELIDADE --> F3[Ver Nível]
+
+        ONEBOT --> O1[Fazer Perguntas]
+        ONEBOT --> O2[Agendar Serviço]
+        ONEBOT --> O3[Programar Lembrete]
+    end
+
+    classDef cliente fill:#00838f,color:#fff,stroke:#006064,stroke-width:2px,font-size:16px
+    classDef modulo fill:#00acc1,color:#fff,stroke:#00838f,stroke-width:1px
+    classDef caso fill:#e8edf4,color:#1a2a3a,stroke:#d5dde8,stroke-width:1px
+
+    class A5 cliente
+    class PDV,FIDELIDADE,ONEBOT modulo
+    class P1,P2,P3,F1,F2,F3,O1,O2,O3 caso
 
    ```
 
