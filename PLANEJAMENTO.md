@@ -6,10 +6,11 @@ Este documento detalha o planejamento estratégico, o escopo do MVP e a modelage
 
 ## 1. INTRODUÇÃO
 
-O **PharmaConekt** centraliza e unifica os dados de estoque e vendas entre farmácias independentes, micro-redes, distribuidores e sistemas de PDV na região metropolitana de Belém. O objetivo principal é mitigar os prejuízos causados por ilhas de informação isoladas, reduzindo rupturas e perdas por vencimento em até 40%.
+O PharmaConekt evoluiu de um simples integrador de estoques para um ecossistema completo de gestão farmacêutica, transformando dados em decisões lucrativas para farmácias independentes e micro-redes na região metropolitana de Belém. O sistema unifica operações (PDV, estoque, caixas, entregas e multi lojas), gestão comercial (clientes, financeiro, vendas, comissões e insights) e estratégia (dashboard, fidelidade, alertas, relatórios e OneBot), eliminando ilhas de informação e capacitando o gestor a competir com as grandes redes. O objetivo principal é reduzir perdas por vencimento e ruptura em até 40%, enquanto aumenta o faturamento com inteligência de dados, sugestões contextualizadas de venda e otimização de preços baseada em análise de mercado.
 
-* **Visão do Produto:** "Para farmácias independentes e micro-redes que sofrem com a desintegração de estoques, o PharmaConekt é um ecossistema SaaS que conecta PDVs e distribuidores, eliminando ilhas de informação e reduzindo perdas em até 40%."
-* **Missão do MVP:** Entregar um barramento funcional em Python Flask com persistência SQLite capaz de gerenciar o onboarding e as métricas táticas de faturamento de forma ágil e centralizada.
+Visão do Produto: "Para farmácias independentes e micro-redes que buscam crescer lucrativamente em um mercado competitivo, o PharmaConekt é um ecossistema SaaS que integra operações, finanças e estratégia, transformando dados em decisões lucrativas e reduzindo perdas em até 40%."
+
+Missão do MVP: Entregar uma plataforma web funcional e intuitiva, com persistência de dados em nuvem, capaz de gerenciar o onboarding, as métricas táticas de faturamento, o programa de fidelidade, os insights de mercado e os alertas inteligentes de forma ágil, centralizada e com dados sincronizados em menos de 5 segundos.
 
 ---
 
